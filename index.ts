@@ -110,3 +110,12 @@ export async function last<T>(iterable: AsyncIterableLike<T>): Promise<T | null>
 }
 
 export const asyncLast = last;
+
+export async function only<T>(iterable: AsyncIterableLike<T>): Promise<T | null> {
+    const iterator = asyncIterator(iterable);
+    const first = await iterator.next();
+
+    return !(first.done ?? false) && ((await iterator.next()).done ?? false) ? first.value : null;
+}
+
+export const asyncOnly = only;
