@@ -53,17 +53,22 @@ export async function* tail<T>(iterable: AsyncIterableLike<T>): AsyncIterable<T>
 
 export const asyncTail = tail;
 
-export async function* push<T>(iterable: AsyncIterableLike<T>, value: T): AsyncIterable<T> {
+export async function* push<T>(
+    iterable: AsyncIterableLike<T>,
+    value: T | Promise<T>
+): AsyncIterable<T> {
     for await (const element of await iterable) {
         yield element;
     }
 
-    yield value;
+    yield await value;
 }
 
 export const asyncPush = push;
 
-export function pushFn<T>(value: T): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+export function pushFn<T>(
+    value: T | Promise<T>
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
     return iterable => push(iterable, value);
 }
 
