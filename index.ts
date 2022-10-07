@@ -171,10 +171,14 @@ export function takeFn<T>(
 
 export const asyncTakeFn = takeFn;
 
-export async function* drop<T>(iterable: AsyncIterableLike<T>, count: number): AsyncIterable<T> {
+export async function* drop<T>(
+    iterable: AsyncIterableLike<T>,
+    count: number | Promise<number>
+): AsyncIterable<T> {
     const iterator = asyncIterator(iterable);
+    const c = await count;
     let result = await iterator.next();
-    for (let i = 0; i < count && result.done !== true; ++i) {
+    for (let i = 0; i < c && result.done !== true; ++i) {
         result = await iterator.next();
     }
 
@@ -186,7 +190,9 @@ export async function* drop<T>(iterable: AsyncIterableLike<T>, count: number): A
 
 export const asyncDrop = drop;
 
-export function dropFn<T>(count: number): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+export function dropFn<T>(
+    count: number | Promise<number>
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
     return iterable => drop(iterable, count);
 }
 
