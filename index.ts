@@ -348,3 +348,37 @@ export function notEqualFn<T>(
 }
 
 export const asyncNotEqualFn = notEqualFn;
+
+export async function prefixMatch<T>(
+    a: AsyncIterableLike<T>,
+    b: AsyncIterableLike<T>,
+    elementsEqual: (a: T, b: T) => boolean | Promise<boolean> = defaultEqual
+): Promise<boolean> {
+    const ait = asyncIterator(a);
+    const bit = asyncIterator(b);
+
+    let ar = await ait.next();
+    let br = await bit.next();
+
+    while (ar.done !== true && br.done !== true) {
+        if (!(await elementsEqual(ar.value, br.value))) {
+            return false;
+        }
+
+        ar = await ait.next();
+        br = await bit.next();
+    }
+
+    return br.done ?? false;
+}
+
+export const asyncPrefixMatch = prefixMatch;
+
+export function prefixMatchFn<T>(
+    b: AsyncIterableLike<T>,
+    elementsEqual: (a: T, b: T) => boolean | Promise<boolean> = defaultEqual
+): (a: AsyncIterableLike<T>) => Promise<boolean> {
+    return async a => prefixMatch(a, b, elementsEqual);
+}
+
+export const asyncPrefixMatchFn = prefixMatchFn;
