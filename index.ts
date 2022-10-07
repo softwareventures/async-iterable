@@ -255,4 +255,19 @@ export function dropWhileFn<T>(
     return iterable => dropWhile(iterable, predicate);
 }
 
-export const asyncDropWhileFn = dropWhileFn;
+export function dropUntil<T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => boolean
+): AsyncIterable<T> {
+    return dropWhile(iterable, (element, index) => !predicate(element, index));
+}
+
+export const asyncDropUntil = dropUntil;
+
+export function dropUntilFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return iterable => dropUntil(iterable, predicate);
+}
+
+export const asyncDropUntilFn = dropUntilFn;
