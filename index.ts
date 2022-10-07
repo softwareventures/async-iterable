@@ -10,6 +10,10 @@ export async function* asyncIterable<T>(iterable: AsyncIterableLike<T>): AsyncIt
     }
 }
 
+export function asyncIterator<T>(iterable: AsyncIterableLike<T>): AsyncIterator<T> {
+    return asyncIterable(iterable)[Symbol.asyncIterator]();
+}
+
 export function isAsyncIterable<T = unknown>(
     value: AsyncIterable<T> | unknown
 ): value is AsyncIterable<T> {
