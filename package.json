@@ -22,6 +22,7 @@
     "node": "^14 || ^16 || >=18"
   },
   "dependencies": {
+    "@softwareventures/ordered": "^1.1.0",
     "tslib": "2.4.0"
   },
   "devDependencies": {

@@ -4,6 +4,7 @@ import {
     drop,
     dropWhile,
     empty,
+    equal,
     initial,
     last,
     notEmpty,
@@ -100,5 +101,37 @@ test("dropWhile", async t => {
     t.deepEqual(
         await toArray(dropWhile(asyncIterable([1, 2, 3, 4, 3, 2, 1]), e => e < 4)),
         [4, 3, 2, 1]
+    );
+});
+
+test("equal", async t => {
+    t.true(await equal(asyncIterable([1, 2, 3]), [1, 2, 3]));
+    t.false(await equal(asyncIterable([1, 2, 3]), [1, 2, 3, 4]));
+    t.false(await equal(asyncIterable([1, 2, 3, 4]), [1, 2, 3]));
+    t.false(await equal(asyncIterable([1, 3, 3]), [1, 2, 3]));
+    t.true(
+        await equal(
+            asyncIterable([
+                [1, 2],
+                [3, 4]
+            ]),
+            [
+                [1, 2],
+                [3, 4]
+            ],
+            equal
+        )
+    );
+    t.false(
+        await equal(
+            asyncIterable([
+                [1, 2],
+                [3, 4]
+            ]),
+            [
+                [1, 2],
+                [3, 4]
+            ]
+        )
     );
 });

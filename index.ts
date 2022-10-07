@@ -1,3 +1,5 @@
+import {equal as defaultEqual} from "@softwareventures/ordered";
+
 export type AsyncIterableLike<T> =
     | AsyncIterable<T>
     | Iterable<T | Promise<T>>
@@ -293,3 +295,37 @@ export function dropUntilFn<T>(
 }
 
 export const asyncDropUntilFn = dropUntilFn;
+
+export async function equal<T>(
+    a: AsyncIterableLike<T>,
+    b: AsyncIterableLike<T>,
+    elementsEqual: (a: T, b: T) => boolean | Promise<boolean> = defaultEqual
+): Promise<boolean> {
+    const ait = asyncIterator(a);
+    const bit = asyncIterator(b);
+
+    let ar = await ait.next();
+    let br = await bit.next();
+
+    while (ar.done !== true && br.done !== true) {
+        if (!(await elementsEqual(ar.value, br.value))) {
+            return false;
+        }
+
+        ar = await ait.next();
+        br = await bit.next();
+    }
+
+    return (ar.done ?? false) && (br.done ?? false);
+}
+
+export const asyncEqual = equal;
+
+export function equalFn<T>(
+    b: AsyncIterableLike<T>,
+    elementsEqual: (a: T, b: T) => boolean | Promise<boolean> = defaultEqual
+): (a: AsyncIterableLike<T>) => Promise<boolean> {
+    return async a => equal(a, b, elementsEqual);
+}
+
+export const asyncEqualFn = equalFn;

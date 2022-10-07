@@ -838,6 +838,7 @@ __metadata:
     "@commitlint/config-conventional": 17.1.0
     "@commitlint/cz-commitlint": 17.1.2
     "@softwareventures/eslint-config": 7.0.0
+    "@softwareventures/ordered": ^1.1.0
     "@softwareventures/precise-commits": 2.0.22
     "@softwareventures/prettier-config": 3.0.0
     "@softwareventures/semantic-release-config": 2.0.2
@@ -898,6 +899,15 @@ __metadata:
   dependencies:
     tslib: ^1.9.3 || ^2.0.0 || ^2.1.0
   checksum: 8a742f83330057b6e6950c49270c560500da930cecc58ff4438c94d0f02ed35a9640ae3a2c5a1c198e93e9f79269c0b11e1d0b20b2bd4fc4ef16e8e727c777c7
+  languageName: node
+  linkType: hard
+
+"@softwareventures/ordered@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@softwareventures/ordered@npm:1.1.0"
+  dependencies:
+    tslib: ^1.9.3 || ^2.0.0 || ^2.1.0
+  checksum: a68d969b9992125f338153f0070beeb60d25e3e91735f8229da900f9a5f20fc07ef7387476b87acb95f955172826006f1154d39fa5c9974089a6edba7b6e29bd
   languageName: node
   linkType: hard
 
