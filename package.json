@@ -73,5 +73,5 @@
   "release": {
     "extends": "@softwareventures/semantic-release-config"
   },
-  "packageManager": "yarn@3.2.3"
+  "packageManager": "yarn@3.2.4"
 }
