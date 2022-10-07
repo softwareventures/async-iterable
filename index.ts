@@ -204,15 +204,15 @@ export function takeWhile<T, U extends T>(
 ): AsyncIterable<U>;
 export function takeWhile<T>(
     iterable: AsyncIterableLike<T>,
-    predicate: (element: T, index: number) => boolean
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
 ): AsyncIterable<T>;
 export async function* takeWhile<T>(
     iterable: AsyncIterableLike<T>,
-    predicate: (element: T, index: number) => boolean
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
 ): AsyncIterable<T> {
     let i = 0;
     for await (const element of await iterable) {
-        if (!predicate(element, i)) {
+        if (!(await predicate(element, i))) {
             return;
         }
         yield element;
@@ -226,10 +226,10 @@ export function takeWhileFn<T, U extends T>(
     predicate: (element: T, index: number) => element is U
 ): (iterable: AsyncIterableLike<T>) => AsyncIterable<U>;
 export function takeWhileFn<T>(
-    predicate: (element: T, index: number) => boolean
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
 ): (iterable: AsyncIterableLike<T>) => AsyncIterable<T>;
 export function takeWhileFn<T>(
-    predicate: (element: T, index: number) => boolean
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
 ): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
     return iterable => takeWhile(iterable, predicate);
 }
