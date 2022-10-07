@@ -279,15 +279,15 @@ export function dropWhileFn<T>(
 
 export function dropUntil<T>(
     iterable: AsyncIterableLike<T>,
-    predicate: (element: T, index: number) => boolean
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
 ): AsyncIterable<T> {
-    return dropWhile(iterable, (element, index) => !predicate(element, index));
+    return dropWhile(iterable, async (element, index) => !(await predicate(element, index)));
 }
 
 export const asyncDropUntil = dropUntil;
 
 export function dropUntilFn<T>(
-    predicate: (element: T, index: number) => boolean
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
 ): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
     return iterable => dropUntil(iterable, predicate);
 }
