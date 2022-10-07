@@ -10,6 +10,12 @@ export async function* asyncIterable<T>(iterable: AsyncIterableLike<T>): AsyncIt
     }
 }
 
+export function isAsyncIterable<T = unknown>(
+    value: AsyncIterable<T> | unknown
+): value is AsyncIterable<T> {
+    return typeof value === "object" && value != null && Symbol.asyncIterator in value;
+}
+
 export async function toArray<T>(iterable: AsyncIterableLike<T>): Promise<T[]> {
     const array: T[] = [];
     for await (const element of await iterable) {
