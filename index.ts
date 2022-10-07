@@ -84,3 +84,17 @@ export function unshiftFn<T>(value: T): (iterable: AsyncIterableLike<T>) => Asyn
 }
 
 export const asyncUnshiftFn = unshiftFn;
+
+export async function* initial<T>(iterable: AsyncIterable<T>): AsyncIterable<T> {
+    const iterator = asyncIterator(iterable);
+    let prev = await iterator.next();
+    let element = prev.done === true ? prev : await iterator.next();
+
+    while (element.done !== true) {
+        yield prev.value;
+        prev = element;
+        element = await iterator.next();
+    }
+}
+
+export const asyncInitial = initial;
