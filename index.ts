@@ -142,8 +142,12 @@ export async function notEmpty(iterable: AsyncIterableLike<unknown>): Promise<bo
 
 export const asyncNotEmpty = notEmpty;
 
-export async function* take<T>(iterable: AsyncIterableLike<T>, count: number): AsyncIterable<T> {
-    if (count === 0) {
+export async function* take<T>(
+    iterable: AsyncIterableLike<T>,
+    count: number | Promise<number>
+): AsyncIterable<T> {
+    const c = await count;
+    if (c === 0) {
         return;
     }
 
@@ -151,7 +155,7 @@ export async function* take<T>(iterable: AsyncIterableLike<T>, count: number): A
 
     for await (const element of await iterable) {
         yield element;
-        if (++i >= count) {
+        if (++i >= c) {
             return;
         }
     }
@@ -159,7 +163,9 @@ export async function* take<T>(iterable: AsyncIterableLike<T>, count: number): A
 
 export const asyncTake = take;
 
-export function takeFn<T>(count: number): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+export function takeFn<T>(
+    count: number | Promise<number>
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
     return iterable => take(iterable, count);
 }
 
