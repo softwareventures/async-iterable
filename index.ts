@@ -98,3 +98,15 @@ export async function* initial<T>(iterable: AsyncIterable<T>): AsyncIterable<T> 
 }
 
 export const asyncInitial = initial;
+
+export async function last<T>(iterable: AsyncIterableLike<T>): Promise<T | null> {
+    let last: T | null = null;
+
+    for await (const element of await iterable) {
+        last = element;
+    }
+
+    return last;
+}
+
+export const asyncLast = last;
