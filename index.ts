@@ -238,15 +238,15 @@ export const asyncTakeWhileFn = takeWhileFn;
 
 export function takeUntil<T>(
     iterable: AsyncIterableLike<T>,
-    predicate: (element: T, index: number) => boolean
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
 ): AsyncIterable<T> {
-    return takeWhile(iterable, (element, index) => !predicate(element, index));
+    return takeWhile(iterable, async (element, index) => !(await predicate(element, index)));
 }
 
 export const asyncTakeUntil = takeUntil;
 
 export function takeUntilFn<T>(
-    predicate: (element: T, index: number) => boolean
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
 ): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
     return iterable => takeUntil(iterable, predicate);
 }
