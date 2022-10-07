@@ -10,9 +10,9 @@
   "repository": "github:softwareventures/async-iterable",
   "license": "ISC",
   "scripts": {
-    "_postinstall": "husky install",
     "commit": "cz",
     "fix": "tsc --noEmit && eslint . --fix && prettier --write .",
+    "postinstall": "husky install",
     "lint": "tsc --noEmit && eslint . && prettier --check .",
     "prepack": "tsc && pinst --disable",
     "postpack": "pinst --enable",
