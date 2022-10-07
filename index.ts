@@ -213,3 +213,29 @@ export function takeWhileFn<T>(
 }
 
 export const asyncTakeWhileFn = takeWhileFn;
+
+export async function* dropWhile<T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => boolean
+): AsyncIterable<T> {
+    const iterator = asyncIterator(iterable);
+    let result = await iterator.next();
+    for (let i = 0; result.done !== true && predicate(result.value, i); ++i) {
+        result = await iterator.next();
+    }
+
+    while (result.done !== true) {
+        yield result.value;
+        result = await iterator.next();
+    }
+}
+
+export const asyncDropWhile = dropWhile;
+
+export function dropWhileFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return iterable => dropWhile(iterable, predicate);
+}
+
+export const asyncDropWhileFn = dropWhileFn;

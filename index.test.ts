@@ -2,6 +2,7 @@ import test from "ava";
 import {
     asyncIterable,
     drop,
+    dropWhile,
     empty,
     initial,
     last,
@@ -85,5 +86,19 @@ test("takeWhile", async t => {
     t.deepEqual(
         await toArray(takeWhile(asyncIterable([1, 2, 3, 4, 3, 2, 1]), e => e < 4)),
         [1, 2, 3]
+    );
+});
+
+test("dropWhile", async t => {
+    t.deepEqual(await toArray(dropWhile(asyncIterable([]), (_, i) => i < 3)), []);
+    t.deepEqual(await toArray(dropWhile(asyncIterable([1, 2]), (_, i) => i < 3)), []);
+    t.deepEqual(await toArray(dropWhile(asyncIterable([1, 2, 3, 4, 5]), (_, i) => i < 3)), [4, 5]);
+    t.deepEqual(
+        await toArray(dropWhile(asyncIterable([1, 2, 3, 4, 5]), () => false)),
+        [1, 2, 3, 4, 5]
+    );
+    t.deepEqual(
+        await toArray(dropWhile(asyncIterable([1, 2, 3, 4, 3, 2, 1]), e => e < 4)),
+        [4, 3, 2, 1]
     );
 });
