@@ -9,3 +9,13 @@ export async function* asyncIterable<T>(iterable: AsyncIterableLike<T>): AsyncIt
         yield element;
     }
 }
+
+export async function toArray<T>(iterable: AsyncIterableLike<T>): Promise<T[]> {
+    const array: T[] = [];
+    for await (const element of await iterable) {
+        array.push(element);
+    }
+    return array;
+}
+
+export const asyncToArray = toArray;
