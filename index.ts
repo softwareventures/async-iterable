@@ -74,8 +74,11 @@ export function pushFn<T>(
 
 export const asyncPushFn = pushFn;
 
-export async function* unshift<T>(iterable: AsyncIterableLike<T>, value: T): AsyncIterable<T> {
-    yield value;
+export async function* unshift<T>(
+    iterable: AsyncIterableLike<T>,
+    value: T | Promise<T>
+): AsyncIterable<T> {
+    yield await value;
 
     for await (const element of await iterable) {
         yield element;
@@ -84,7 +87,9 @@ export async function* unshift<T>(iterable: AsyncIterableLike<T>, value: T): Asy
 
 export const asyncUnshift = unshift;
 
-export function unshiftFn<T>(value: T): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+export function unshiftFn<T>(
+    value: T | Promise<T>
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
     return iterable => unshift(iterable, value);
 }
 
