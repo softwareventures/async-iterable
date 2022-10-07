@@ -125,3 +125,9 @@ export async function empty(iterable: AsyncIterableLike<unknown>): Promise<boole
 }
 
 export const asyncEmpty = empty;
+
+export async function notEmpty(iterable: AsyncIterableLike<unknown>): Promise<boolean> {
+    return !(await empty(iterable));
+}
+
+export const asyncNotEmpty = notEmpty;
