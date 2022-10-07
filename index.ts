@@ -119,3 +119,9 @@ export async function only<T>(iterable: AsyncIterableLike<T>): Promise<T | null>
 }
 
 export const asyncOnly = only;
+
+export async function empty(iterable: AsyncIterableLike<unknown>): Promise<boolean> {
+    return (await asyncIterator(iterable).next()).done === true;
+}
+
+export const asyncEmpty = empty;

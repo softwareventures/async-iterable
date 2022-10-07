@@ -1,5 +1,5 @@
 import test from "ava";
-import {asyncIterable, initial, last, only, push, tail, toArray, unshift} from "./index";
+import {asyncIterable, empty, initial, last, only, push, tail, toArray, unshift} from "./index";
 
 test("tail", async t => {
     t.deepEqual(await toArray(tail(asyncIterable([1, 2, 3, 4]))), [2, 3, 4]);
@@ -32,4 +32,10 @@ test("only", async t => {
     t.is(await only(asyncIterable([])), null);
     t.is(await only(asyncIterable([4])), 4);
     t.is(await only(asyncIterable([3, 4, 5])), null);
+});
+
+test("empty", async t => {
+    t.is(await empty(asyncIterable([])), true);
+    t.is(await empty(asyncIterable([1])), false);
+    t.is(await empty(asyncIterable([1, 2, 3])), false);
 });
