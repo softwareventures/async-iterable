@@ -329,3 +329,22 @@ export function equalFn<T>(
 }
 
 export const asyncEqualFn = equalFn;
+
+export async function notEqual<T>(
+    a: AsyncIterableLike<T>,
+    b: AsyncIterableLike<T>,
+    elementsEqual: (a: T, b: T) => boolean | Promise<boolean> = defaultEqual
+): Promise<boolean> {
+    return !(await equal(a, b, elementsEqual));
+}
+
+export const asyncNotEqual = notEqual;
+
+export function notEqualFn<T>(
+    b: AsyncIterableLike<T>,
+    elementsEqual: (a: T, b: T) => boolean | Promise<boolean> = defaultEqual
+): (a: AsyncIterableLike<T>) => Promise<boolean> {
+    return async a => notEqual(a, b, elementsEqual);
+}
+
+export const asyncNotEqualFn = notEqualFn;
