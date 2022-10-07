@@ -25,3 +25,13 @@ export async function toArray<T>(iterable: AsyncIterableLike<T>): Promise<T[]> {
 }
 
 export const asyncToArray = toArray;
+
+export async function first<T>(iterable: AsyncIterableLike<T>): Promise<T | null> {
+    for await (const element of await iterable) {
+        return element;
+    }
+
+    return null;
+}
+
+export const asyncFirst = first;
