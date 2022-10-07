@@ -8,6 +8,7 @@ import {
     only,
     push,
     tail,
+    take,
     toArray,
     unshift
 } from "./index";
@@ -55,4 +56,11 @@ test("notEmpty", async t => {
     t.is(await notEmpty(asyncIterable([])), false);
     t.is(await notEmpty(asyncIterable([1])), true);
     t.is(await notEmpty(asyncIterable([1, 2, 3])), true);
+});
+
+test("take", async t => {
+    t.deepEqual(await toArray(take(asyncIterable([]), 3)), []);
+    t.deepEqual(await toArray(take(asyncIterable([1, 2]), 3)), [1, 2]);
+    t.deepEqual(await toArray(take(asyncIterable([1, 2, 3, 4, 5]), 3)), [1, 2, 3]);
+    t.deepEqual(await toArray(take(asyncIterable([1, 2, 3, 4, 5]), 0)), []);
 });
