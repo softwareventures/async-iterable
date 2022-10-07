@@ -10,6 +10,7 @@ import {
     push,
     tail,
     take,
+    takeWhile,
     toArray,
     unshift
 } from "./index";
@@ -71,4 +72,18 @@ test("drop", async t => {
     t.deepEqual(await toArray(drop(asyncIterable([1, 2]), 3)), []);
     t.deepEqual(await toArray(drop(asyncIterable([1, 2, 3, 4, 5]), 3)), [4, 5]);
     t.deepEqual(await toArray(drop(asyncIterable([1, 2, 3, 4, 5]), 0)), [1, 2, 3, 4, 5]);
+});
+
+test("takeWhile", async t => {
+    t.deepEqual(await toArray(takeWhile(asyncIterable([]), (_, i) => i < 3)), []);
+    t.deepEqual(await toArray(takeWhile(asyncIterable([1, 2]), (_, i) => i < 3)), [1, 2]);
+    t.deepEqual(
+        await toArray(takeWhile(asyncIterable([1, 2, 3, 4, 5]), (_, i) => i < 3)),
+        [1, 2, 3]
+    );
+    t.deepEqual(await toArray(takeWhile(asyncIterable([1, 2, 3, 4, 5]), () => false)), []);
+    t.deepEqual(
+        await toArray(takeWhile(asyncIterable([1, 2, 3, 4, 3, 2, 1]), e => e < 4)),
+        [1, 2, 3]
+    );
 });

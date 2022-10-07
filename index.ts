@@ -175,3 +175,41 @@ export function dropFn<T>(count: number): (iterable: AsyncIterableLike<T>) => As
 }
 
 export const asyncDropFn = dropFn;
+
+export function takeWhile<T, U extends T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => element is U
+): AsyncIterable<U>;
+export function takeWhile<T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => boolean
+): AsyncIterable<T>;
+export async function* takeWhile<T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => boolean
+): AsyncIterable<T> {
+    let i = 0;
+    for await (const element of await iterable) {
+        if (!predicate(element, i)) {
+            return;
+        }
+        yield element;
+        ++i;
+    }
+}
+
+export const asyncTakeWhile = takeWhile;
+
+export function takeWhileFn<T, U extends T>(
+    predicate: (element: T, index: number) => element is U
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<U>;
+export function takeWhileFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T>;
+export function takeWhileFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return iterable => takeWhile(iterable, predicate);
+}
+
+export const asyncTakeWhileFn = takeWhileFn;
