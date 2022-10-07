@@ -1,6 +1,7 @@
 import test from "ava";
 import {
     asyncIterable,
+    drop,
     empty,
     initial,
     last,
@@ -63,4 +64,11 @@ test("take", async t => {
     t.deepEqual(await toArray(take(asyncIterable([1, 2]), 3)), [1, 2]);
     t.deepEqual(await toArray(take(asyncIterable([1, 2, 3, 4, 5]), 3)), [1, 2, 3]);
     t.deepEqual(await toArray(take(asyncIterable([1, 2, 3, 4, 5]), 0)), []);
+});
+
+test("drop", async t => {
+    t.deepEqual(await toArray(drop(asyncIterable([]), 3)), []);
+    t.deepEqual(await toArray(drop(asyncIterable([1, 2]), 3)), []);
+    t.deepEqual(await toArray(drop(asyncIterable([1, 2, 3, 4, 5]), 3)), [4, 5]);
+    t.deepEqual(await toArray(drop(asyncIterable([1, 2, 3, 4, 5]), 0)), [1, 2, 3, 4, 5]);
 });

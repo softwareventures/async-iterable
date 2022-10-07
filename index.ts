@@ -154,3 +154,24 @@ export function takeFn<T>(count: number): (iterable: AsyncIterableLike<T>) => As
 }
 
 export const asyncTakeFn = takeFn;
+
+export async function* drop<T>(iterable: AsyncIterableLike<T>, count: number): AsyncIterable<T> {
+    const iterator = asyncIterator(iterable);
+    let result = await iterator.next();
+    for (let i = 0; i < count && result.done !== true; ++i) {
+        result = await iterator.next();
+    }
+
+    while (result.done !== true) {
+        yield result.value;
+        result = await iterator.next();
+    }
+}
+
+export const asyncDrop = drop;
+
+export function dropFn<T>(count: number): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return iterable => drop(iterable, count);
+}
+
+export const asyncDropFn = dropFn;
