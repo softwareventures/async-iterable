@@ -39,3 +39,16 @@ export async function first<T>(iterable: AsyncIterableLike<T>): Promise<T | null
 }
 
 export const asyncFirst = first;
+
+export async function* tail<T>(iterable: AsyncIterableLike<T>): AsyncIterable<T> {
+    const iterator = asyncIterator(iterable);
+    await iterator.next();
+
+    let result = await iterator.next();
+    while (result.done !== true) {
+        yield result.value;
+        result = await iterator.next();
+    }
+}
+
+export const asyncTail = tail;
