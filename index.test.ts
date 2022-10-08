@@ -7,6 +7,7 @@ import {
     equal,
     initial,
     last,
+    map,
     notEmpty,
     only,
     prefixMatch,
@@ -143,4 +144,12 @@ test("prefixMatch", async t => {
     t.true(await prefixMatch(asyncIterable([1, 2, 3, 4]), [1, 2]));
     t.false(await prefixMatch(asyncIterable([1, 3, 4]), [1, 2]));
     t.false(await prefixMatch(asyncIterable([]), [1]));
+});
+
+test("map", async t => {
+    t.deepEqual(await toArray(map(asyncIterable([1, 2, 3]), e => e + 1)), [2, 3, 4]);
+    t.deepEqual(
+        await toArray(map(asyncIterable([1, 2, 3]), (e, i) => (i === 1 ? e * 10 : e))),
+        [1, 20, 3]
+    );
 });

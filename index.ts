@@ -382,3 +382,23 @@ export function prefixMatchFn<T>(
 }
 
 export const asyncPrefixMatchFn = prefixMatchFn;
+
+export async function* map<T, U>(
+    iterable: AsyncIterableLike<T>,
+    f: (element: T, index: number) => U | Promise<U>
+): AsyncIterable<U> {
+    let i = 0;
+    for await (const element of await iterable) {
+        yield await f(element, i++);
+    }
+}
+
+export const asyncMap = map;
+
+export function mapFn<T, U>(
+    f: (element: T) => U | Promise<U>
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<U> {
+    return iterable => map(iterable, f);
+}
+
+export const asyncMapFn = mapFn;
