@@ -836,3 +836,14 @@ export async function product(iterable: AsyncIterableLike<number>): Promise<numb
 }
 
 export const asyncProduct = product;
+
+export async function average(iterable: AsyncIterableLike<number>): Promise<number | null> {
+    const [sum, count] = await fold(
+        iterable,
+        ([sum], element, index) => [sum + element, index + 1],
+        [0, 0]
+    );
+    return count === 0 ? null : sum / count;
+}
+
+export const asyncAverage = average;

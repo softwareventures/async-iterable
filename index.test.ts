@@ -1,6 +1,7 @@
 import test from "ava";
 import {
     asyncIterable,
+    average,
     contains,
     drop,
     dropWhile,
@@ -262,4 +263,10 @@ test("product", async t => {
     t.is(await product(asyncIterable([1, 2, 3])), 6);
     t.is(await product(asyncIterable([1, 2, 3, 2])), 12);
     t.is(await product(asyncIterable([])), 1);
+});
+
+test("average", async t => {
+    t.is(await average(asyncIterable([1, 2, 3])), 2);
+    t.is(await average(asyncIterable([1, 2, 3, 2])), 2);
+    t.is(await average(asyncIterable([])), null);
 });
