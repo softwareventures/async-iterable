@@ -21,6 +21,7 @@ import {
     map,
     maximum,
     maximumBy,
+    minimum,
     notEmpty,
     only,
     prefixMatch,
@@ -235,4 +236,10 @@ test("maximumBy", async t => {
     t.is(await maximumBy(asyncIterable(["1", "2", "3"]), Number), "3");
     t.is(await maximumBy(asyncIterable(["1", "2", "3", "4", "3", "2", "1"]), Number), "4");
     t.is(await maximumBy(asyncIterable([]), Number), null);
+});
+
+test("minimum", async t => {
+    t.is(await minimum(asyncIterable([1, 2, 3])), 1);
+    t.is(await minimum(asyncIterable([2, 3, 4, 1, 2, 3])), 1);
+    t.is(await minimum(asyncIterable([])), null);
 });

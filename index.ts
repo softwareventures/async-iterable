@@ -1,5 +1,5 @@
 import type {Comparator} from "@softwareventures/ordered";
-import {compare as defaultCompare, equal as defaultEqual} from "@softwareventures/ordered";
+import {compare as defaultCompare, equal as defaultEqual, reverse} from "@softwareventures/ordered";
 import {isNotNull} from "@softwareventures/nullable";
 
 export type AsyncIterableLike<T> =
@@ -780,3 +780,30 @@ export function maximumByFn<T>(
 }
 
 export const asyncMaximumByFn = maximumByFn;
+
+export async function minimum<T extends string | number | boolean>(
+    iterable: AsyncIterableLike<T>
+): Promise<T | null>;
+export async function minimum<T>(
+    iterable: AsyncIterableLike<T>,
+    compare: Comparator<T>
+): Promise<T | null>;
+export async function minimum<T>(
+    iterable: AsyncIterableLike<T>,
+    compare?: Comparator<T>
+): Promise<T | null> {
+    return internalMaximum(
+        iterable,
+        reverse(compare ?? (defaultCompare as unknown as Comparator<T>))
+    );
+}
+
+export const asyncMinimum = minimum;
+
+export function minimumFn<T>(
+    compare: Comparator<T>
+): (iterable: AsyncIterableLike<T>) => Promise<T | null> {
+    return async iterable => minimum(iterable, compare);
+}
+
+export const asyncMinimumFn = minimumFn;
