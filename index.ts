@@ -594,3 +594,22 @@ export function containsFn<T>(value: T): (iterable: AsyncIterableLike<T>) => Pro
 }
 
 export const asyncContainsFn = containsFn;
+
+export async function indexOf<T>(iterable: AsyncIterableLike<T>, value: T): Promise<number | null> {
+    let i = 0;
+    for await (const element of await iterable) {
+        if (element === value) {
+            return i;
+        }
+        ++i;
+    }
+    return null;
+}
+
+export const asyncIndexOf = indexOf;
+
+export function indexOfFn<T>(value: T): (iterable: AsyncIterableLike<T>) => Promise<number | null> {
+    return async iterable => indexOf(iterable, value);
+}
+
+export const asyncIndexOfFn = indexOfFn;

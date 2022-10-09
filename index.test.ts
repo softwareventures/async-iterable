@@ -12,6 +12,7 @@ import {
     filter,
     fold,
     fold1,
+    indexOf,
     initial,
     last,
     map,
@@ -199,4 +200,9 @@ test("fold1", async t => {
 test("contains", async t => {
     t.true(await contains(asyncIterable([1, 2, 3]), 1));
     t.false(await contains(asyncIterable([1, 2, 3]), 0));
+});
+
+test("indexOf", async t => {
+    t.is(await indexOf(asyncIterable([1, 2, 3, 4, 3, 2, 1]), 3), 2);
+    t.is(await indexOf(asyncIterable([1, 2, 3, 4, 3, 2, 1]), 5), null);
 });
