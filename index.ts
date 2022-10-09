@@ -859,3 +859,12 @@ export async function or(iterable: AsyncIterableLike<boolean>): Promise<boolean>
 }
 
 export const asyncOr = or;
+
+export async function any<T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
+): Promise<boolean> {
+    return (await findIndex(iterable, predicate)) != null;
+}
+
+export const asyncAny = any;
