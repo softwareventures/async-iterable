@@ -807,3 +807,20 @@ export function minimumFn<T>(
 }
 
 export const asyncMinimumFn = minimumFn;
+
+export async function minimumBy<T>(
+    iterable: AsyncIterableLike<T>,
+    select: (element: T, index: number) => number | Promise<number>
+): Promise<T | null> {
+    return maximumBy(iterable, async (element, index) => -(await select(element, index)));
+}
+
+export const asyncMinimumBy = minimumBy;
+
+export function minimumByFn<T>(
+    select: (element: T, index: number) => number | Promise<number>
+): (iterable: AsyncIterableLike<T>) => Promise<T | null> {
+    return async iterable => minimumBy(iterable, select);
+}
+
+export const asyncMinimumByFn = minimumByFn;
