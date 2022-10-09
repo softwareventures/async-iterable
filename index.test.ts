@@ -127,11 +127,11 @@ test("equal", async t => {
 });
 
 test("prefixMatch", async t => {
-    t.true(await prefixMatch(asyncIterable([]), []));
-    t.true(await prefixMatch(asyncIterable([1, 2, 3]), []));
-    t.true(await prefixMatch(asyncIterable([1, 2, 3, 4]), [1, 2]));
-    t.false(await prefixMatch(asyncIterable([1, 3, 4]), [1, 2]));
-    t.false(await prefixMatch(asyncIterable([]), [1]));
+    t.true(await prefixMatch(asyncIterable([]), asyncIterable([])));
+    t.true(await prefixMatch(asyncIterable([1, 2, 3]), asyncIterable([])));
+    t.true(await prefixMatch(asyncIterable([1, 2, 3, 4]), asyncIterable([1, 2])));
+    t.false(await prefixMatch(asyncIterable([1, 3, 4]), asyncIterable([1, 2])));
+    t.false(await prefixMatch(asyncIterable([]), asyncIterable([1])));
 });
 
 test("map", async t => {
