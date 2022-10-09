@@ -1,4 +1,5 @@
 import {equal as defaultEqual} from "@softwareventures/ordered";
+import {isNotNull} from "@softwareventures/nullable";
 
 export type AsyncIterableLike<T> =
     | AsyncIterable<T>
@@ -453,6 +454,14 @@ export function excludeFn<T>(
 }
 
 export const asyncExcludeFn = exclude;
+
+export function excludeNull<T>(
+    iterable: AsyncIterableLike<T | null | undefined>
+): AsyncIterable<T> {
+    return filter(iterable, isNotNull);
+}
+
+export const asyncExcludeNull = excludeNull;
 
 export async function* excludeFirst<T>(
     iterable: AsyncIterableLike<T>,
