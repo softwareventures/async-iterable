@@ -453,3 +453,38 @@ export function excludeFn<T>(
 }
 
 export const asyncExcludeFn = exclude;
+
+export async function* excludeFirst<T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
+): AsyncIterable<T> {
+    const iterator = asyncIterator(iterable);
+    let result = await iterator.next();
+
+    for (let i = 0; result.done !== true; ++i) {
+        if (await predicate(result.value, i)) {
+            break;
+        }
+        yield result.value;
+        result = await iterator.next();
+    }
+
+    if (result.done !== true) {
+        result = await iterator.next();
+    }
+
+    while (result.done !== true) {
+        yield result.value;
+        result = await iterator.next();
+    }
+}
+
+export const asyncExcludeFirst = excludeFirst;
+
+export function excludeFirstFn<T>(
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return iterable => excludeFirst(iterable, predicate);
+}
+
+export const asyncExcludeFirstFn = excludeFirstFn;

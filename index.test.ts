@@ -6,6 +6,7 @@ import {
     empty,
     equal,
     exclude,
+    excludeFirst,
     filter,
     initial,
     last,
@@ -156,5 +157,12 @@ test("exclude", async t => {
     t.deepEqual(
         await toArray(exclude(asyncIterable([1, 2, 3, 4, 3, 2, 1]), n => n < 3)),
         [3, 4, 3]
+    );
+});
+
+test("excludeFirst", async t => {
+    t.deepEqual(
+        await toArray(excludeFirst(asyncIterable([1, 2, 3, 4, 3, 2, 1]), n => n > 2)),
+        [1, 2, 4, 3, 2, 1]
     );
 });
