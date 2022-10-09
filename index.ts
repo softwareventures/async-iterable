@@ -578,6 +578,28 @@ export function fold1Fn<T>(
 
 export const asyncFold1Fn = fold1Fn;
 
+export async function index<T>(iterable: AsyncIterableLike<T>, index: number): Promise<T | null> {
+    if (index < 0 || !isFinite(index) || Math.floor(index) !== index) {
+        throw new RangeError("illegal index");
+    }
+
+    let i = 0;
+    for await (const element of await iterable) {
+        if (i++ === index) {
+            return element;
+        }
+    }
+    return null;
+}
+
+export const asyncIndex = index;
+
+export function indexFn<T>(index: number): (iterable: AsyncIterableLike<T>) => Promise<T | null> {
+    return async iterable => asyncIndex(iterable, index);
+}
+
+export const asyncIndexFn = indexFn;
+
 export async function contains<T>(iterable: AsyncIterableLike<T>, value: T): Promise<boolean> {
     for await (const element of await iterable) {
         if (element === value) {

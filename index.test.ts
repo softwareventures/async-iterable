@@ -12,6 +12,7 @@ import {
     filter,
     fold,
     fold1,
+    index,
     indexOf,
     initial,
     last,
@@ -195,6 +196,11 @@ test("fold", async t => {
 
 test("fold1", async t => {
     t.is(await fold1(asyncIterable([1, 2, 3]), (a, e, i) => a + e * i), 9);
+});
+
+test("index", async t => {
+    t.is(await index(asyncIterable([1, 2, 3, 4, 3, 2, 1]), 2), 3);
+    t.is(await index(asyncIterable([1, 2, 3, 4, 3, 2, 1]), 7), null);
 });
 
 test("contains", async t => {
