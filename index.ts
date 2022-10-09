@@ -497,3 +497,15 @@ export function excludeFirstFn<T>(
 }
 
 export const asyncExcludeFirstFn = excludeFirstFn;
+
+export function remove<T>(iterable: AsyncIterableLike<T>, value: T): AsyncIterable<T> {
+    return exclude(iterable, element => element === value);
+}
+
+export const asyncRemove = remove;
+
+export function removeFn<T>(value: T): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return iterable => remove(iterable, value);
+}
+
+export const asyncRemoveFn = removeFn;
