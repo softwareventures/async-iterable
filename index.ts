@@ -635,3 +635,27 @@ export function indexOfFn<T>(value: T): (iterable: AsyncIterableLike<T>) => Prom
 }
 
 export const asyncIndexOfFn = indexOfFn;
+
+export async function findIndex<T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
+): Promise<number | null> {
+    let i = 0;
+    for await (const element of await iterable) {
+        if (await predicate(element, i)) {
+            return i;
+        }
+        ++i;
+    }
+    return null;
+}
+
+export const asyncFindIndex = findIndex;
+
+export function findIndexFn<T>(
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
+): (iterable: AsyncIterableLike<T>) => Promise<number | null> {
+    return async iterable => findIndex(iterable, predicate);
+}
+
+export const asyncFindIndexFn = findIndexFn;
