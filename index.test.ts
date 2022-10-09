@@ -19,6 +19,7 @@ import {
     initial,
     last,
     map,
+    maximum,
     notEmpty,
     only,
     prefixMatch,
@@ -221,4 +222,10 @@ test("findIndex", async t => {
 
 test("find", async t => {
     t.is(await find(asyncIterable([1, 2, 3, 4, 3, 2, 1]), n => n >= 3), 3);
+});
+
+test("maximum", async t => {
+    t.is(await maximum(asyncIterable([1, 2, 3])), 3);
+    t.is(await maximum(asyncIterable([1, 2, 3, 4, 3, 2, 1])), 4);
+    t.is(await maximum(asyncIterable([])), null);
 });

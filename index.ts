@@ -1,4 +1,5 @@
-import {equal as defaultEqual} from "@softwareventures/ordered";
+import type {Comparator} from "@softwareventures/ordered";
+import {compare as defaultCompare, equal as defaultEqual} from "@softwareventures/ordered";
 import {isNotNull} from "@softwareventures/nullable";
 
 export type AsyncIterableLike<T> =
@@ -696,3 +697,48 @@ export function findFn<T>(
 }
 
 export const asyncFindFn = findFn;
+
+export async function maximum<T extends string | number | boolean>(
+    iterable: AsyncIterableLike<T>
+): Promise<T | null>;
+export async function maximum<T>(
+    iterable: AsyncIterableLike<T>,
+    compare: Comparator<T>
+): Promise<T | null>;
+export async function maximum<T>(
+    iterable: AsyncIterableLike<T>,
+    compare?: Comparator<T>
+): Promise<T | null> {
+    return internalMaximum(iterable, compare ?? (defaultCompare as unknown as Comparator<T>));
+}
+
+export const asyncMaximum = maximum;
+
+export function maximumFn<T>(
+    compare: Comparator<T>
+): (iterable: AsyncIterableLike<T>) => Promise<T | null> {
+    return async iterable => maximum(iterable, compare);
+}
+
+async function internalMaximum<T>(
+    iterable: AsyncIterableLike<T>,
+    compare: Comparator<T>
+): Promise<T | null> {
+    const iterator = asyncIterator(iterable);
+    let result = await iterator.next();
+
+    if (result.done === true) {
+        return null;
+    }
+
+    let max = result.value;
+    result = await iterator.next();
+    while (result.done !== true) {
+        if (compare(result.value, max) > 0) {
+            max = result.value;
+        }
+        result = await iterator.next();
+    }
+
+    return max;
+}
