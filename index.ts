@@ -521,3 +521,27 @@ export function removeFirstFn<T>(value: T): (iterable: AsyncIterableLike<T>) => 
 }
 
 export const asyncRemoveFirstFn = removeFirstFn;
+
+export async function fold<T, U>(
+    iterable: AsyncIterableLike<T>,
+    f: (accumulator: U, element: T, index: number) => U | Promise<U>,
+    initial: U
+): Promise<U> {
+    let accumulator = initial;
+    let i = 0;
+    for await (const element of await iterable) {
+        accumulator = await f(accumulator, element, i++);
+    }
+    return accumulator;
+}
+
+export const asyncFold = fold;
+
+export function foldFn<T, U>(
+    f: (accumulator: U, element: T, index: number) => U | Promise<U>,
+    initial: U
+): (iterable: AsyncIterableLike<T>) => Promise<U> {
+    return async iterable => fold(iterable, f, initial);
+}
+
+export const asyncFoldFn = foldFn;
