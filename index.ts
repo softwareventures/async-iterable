@@ -847,3 +847,9 @@ export async function average(iterable: AsyncIterableLike<number>): Promise<numb
 }
 
 export const asyncAverage = average;
+
+export async function and(iterable: AsyncIterableLike<boolean>): Promise<boolean> {
+    return (await findIndex(iterable, element => !element)) == null;
+}
+
+export const asyncAnd = and;

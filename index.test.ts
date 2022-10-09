@@ -1,5 +1,6 @@
 import test from "ava";
 import {
+    and,
     asyncIterable,
     average,
     contains,
@@ -269,4 +270,10 @@ test("average", async t => {
     t.is(await average(asyncIterable([1, 2, 3])), 2);
     t.is(await average(asyncIterable([1, 2, 3, 2])), 2);
     t.is(await average(asyncIterable([])), null);
+});
+
+test("and", async t => {
+    t.true(await and(asyncIterable([true, true, true])));
+    t.false(await and(asyncIterable([true, false, true])));
+    t.true(await and(asyncIterable([])));
 });
