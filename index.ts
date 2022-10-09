@@ -402,3 +402,37 @@ export function mapFn<T, U>(
 }
 
 export const asyncMapFn = mapFn;
+
+export function filter<T, U extends T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => element is U
+): AsyncIterable<U>;
+export function filter<T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
+): AsyncIterable<T>;
+export async function* filter<T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
+): AsyncIterable<T> {
+    let i = 0;
+    for await (const element of await iterable) {
+        if (await predicate(element, i++)) {
+            yield element;
+        }
+    }
+}
+
+export const asyncFilter = filter;
+
+export function filterFn<T, U extends T>(
+    predicate: (element: T, index: number) => element is U
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<U>;
+export function filterFn<T>(
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T>;
+export function filterFn<T>(
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return iterable => filter(iterable, predicate);
+}

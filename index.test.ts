@@ -5,6 +5,7 @@ import {
     dropWhile,
     empty,
     equal,
+    filter,
     initial,
     last,
     map,
@@ -139,5 +140,13 @@ test("map", async t => {
     t.deepEqual(
         await toArray(map(asyncIterable([1, 2, 3]), (e, i) => (i === 1 ? e * 10 : e))),
         [1, 20, 3]
+    );
+});
+
+test("filter", async t => {
+    t.deepEqual(await toArray(filter(asyncIterable([1, 2, 3]), e => e % 2 === 1)), [1, 3]);
+    t.deepEqual(
+        await toArray(filter(asyncIterable([1, 3, 2, 4, 5]), (_, i) => i % 2 === 0)),
+        [1, 2, 5]
     );
 });
