@@ -107,33 +107,21 @@ test("dropWhile", async t => {
 });
 
 test("equal", async t => {
-    t.true(await equal(asyncIterable([1, 2, 3]), [1, 2, 3]));
-    t.false(await equal(asyncIterable([1, 2, 3]), [1, 2, 3, 4]));
-    t.false(await equal(asyncIterable([1, 2, 3, 4]), [1, 2, 3]));
-    t.false(await equal(asyncIterable([1, 3, 3]), [1, 2, 3]));
+    t.true(await equal(asyncIterable([1, 2, 3]), asyncIterable([1, 2, 3])));
+    t.false(await equal(asyncIterable([1, 2, 3]), asyncIterable([1, 2, 3, 4])));
+    t.false(await equal(asyncIterable([1, 2, 3, 4]), asyncIterable([1, 2, 3])));
+    t.false(await equal(asyncIterable([1, 3, 3]), asyncIterable([1, 2, 3])));
     t.true(
         await equal(
-            asyncIterable([
-                [1, 2],
-                [3, 4]
-            ]),
-            [
-                [1, 2],
-                [3, 4]
-            ],
+            asyncIterable([asyncIterable([1, 2]), asyncIterable([3, 4])]),
+            asyncIterable([asyncIterable([1, 2]), asyncIterable([3, 4])]),
             equal
         )
     );
     t.false(
         await equal(
-            asyncIterable([
-                [1, 2],
-                [3, 4]
-            ]),
-            [
-                [1, 2],
-                [3, 4]
-            ]
+            asyncIterable([asyncIterable([1, 2]), asyncIterable([3, 4])]),
+            asyncIterable([asyncIterable([1, 2]), asyncIterable([3, 4])])
         )
     );
 });
