@@ -26,6 +26,7 @@ import {
     notEmpty,
     only,
     prefixMatch,
+    product,
     push,
     remove,
     removeFirst,
@@ -255,4 +256,10 @@ test("minimumBy", async t => {
 test("sum", async t => {
     t.is(await sum(asyncIterable([1, 2, 3])), 6);
     t.is(await sum(asyncIterable([])), 0);
+});
+
+test("product", async t => {
+    t.is(await product(asyncIterable([1, 2, 3])), 6);
+    t.is(await product(asyncIterable([1, 2, 3, 2])), 12);
+    t.is(await product(asyncIterable([])), 1);
 });

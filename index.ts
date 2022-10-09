@@ -830,3 +830,9 @@ export async function sum(iterable: AsyncIterableLike<number>): Promise<number> 
 }
 
 export const asyncSum = sum;
+
+export async function product(iterable: AsyncIterableLike<number>): Promise<number> {
+    return fold(iterable, (product, element) => product * element, 1);
+}
+
+export const asyncProduct = product;
