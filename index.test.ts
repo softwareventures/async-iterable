@@ -1,6 +1,7 @@
 import test from "ava";
 import {
     asyncIterable,
+    contains,
     drop,
     dropWhile,
     empty,
@@ -193,4 +194,9 @@ test("fold", async t => {
 
 test("fold1", async t => {
     t.is(await fold1(asyncIterable([1, 2, 3]), (a, e, i) => a + e * i), 9);
+});
+
+test("contains", async t => {
+    t.true(await contains(asyncIterable([1, 2, 3]), 1));
+    t.false(await contains(asyncIterable([1, 2, 3]), 0));
 });

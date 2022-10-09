@@ -577,3 +577,20 @@ export function fold1Fn<T>(
 }
 
 export const asyncFold1Fn = fold1Fn;
+
+export async function contains<T>(iterable: AsyncIterableLike<T>, value: T): Promise<boolean> {
+    for await (const element of await iterable) {
+        if (element === value) {
+            return true;
+        }
+    }
+    return false;
+}
+
+export const asyncContains = contains;
+
+export function containsFn<T>(value: T): (iterable: AsyncIterableLike<T>) => Promise<boolean> {
+    return async iterable => contains(iterable, value);
+}
+
+export const asyncContainsFn = containsFn;
