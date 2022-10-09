@@ -1,5 +1,6 @@
 import test from "ava";
 import {
+    all,
     and,
     any,
     asyncIterable,
@@ -289,4 +290,9 @@ test("or", async t => {
 test("any", async t => {
     t.true(await any(asyncIterable([1, 2, 3]), e => e > 2));
     t.false(await any(asyncIterable([1, 2, 3]), e => e > 4));
+});
+
+test("all", async t => {
+    t.true(await all(asyncIterable([1, 2, 3]), e => e < 4));
+    t.false(await all(asyncIterable([1, 2, 3]), e => e > 2));
 });

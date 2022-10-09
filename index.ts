@@ -868,3 +868,15 @@ export async function any<T>(
 }
 
 export const asyncAny = any;
+
+export async function all<T>(
+    iterable: AsyncIterableLike<T>,
+    predicate: (element: T, index: number) => boolean | Promise<boolean>
+): Promise<boolean> {
+    return (
+        (await findIndex(iterable, async (element, index) => !(await predicate(element, index)))) ==
+        null
+    );
+}
+
+export const asyncAll = all;
