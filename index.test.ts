@@ -10,6 +10,7 @@ import {
     excludeFirst,
     excludeNull,
     filter,
+    find,
     findIndex,
     fold,
     fold1,
@@ -216,4 +217,8 @@ test("indexOf", async t => {
 
 test("findIndex", async t => {
     t.is(await findIndex(asyncIterable([1, 2, 3, 4, 3, 2, 1]), n => n >= 3), 2);
+});
+
+test("find", async t => {
+    t.is(await find(asyncIterable([1, 2, 3, 4, 3, 2, 1]), n => n >= 3), 3);
 });
