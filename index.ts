@@ -545,3 +545,35 @@ export function foldFn<T, U>(
 }
 
 export const asyncFoldFn = foldFn;
+
+export async function fold1<T>(
+    iterable: AsyncIterableLike<T>,
+    f: (accumulator: T, element: T, index: number) => T | Promise<T>
+): Promise<T> {
+    const iterator = asyncIterator(iterable);
+    let result = await iterator.next();
+
+    if (result.done === true) {
+        throw new TypeError("fold1: empty AsyncIterable");
+    }
+
+    let accumulator = result.value;
+    let i = 1;
+    result = await iterator.next();
+    while (result.done !== true) {
+        accumulator = await f(accumulator, result.value, i++);
+        result = await iterator.next();
+    }
+
+    return accumulator;
+}
+
+export const asyncFold1 = fold1;
+
+export function fold1Fn<T>(
+    f: (accumulator: T, element: T, index: number) => T | Promise<T>
+): (iterable: AsyncIterableLike<T>) => Promise<T> {
+    return async iterable => fold1(iterable, f);
+}
+
+export const asyncFold1Fn = fold1Fn;

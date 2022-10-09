@@ -10,6 +10,7 @@ import {
     excludeNull,
     filter,
     fold,
+    fold1,
     initial,
     last,
     map,
@@ -188,4 +189,8 @@ test("removeFirst", async t => {
 
 test("fold", async t => {
     t.is(await fold(asyncIterable([1, 2, 3]), (a, e, i) => a + e * i, 0), 8);
+});
+
+test("fold1", async t => {
+    t.is(await fold1(asyncIterable([1, 2, 3]), (a, e, i) => a + e * i), 9);
 });
