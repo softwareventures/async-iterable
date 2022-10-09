@@ -742,3 +742,41 @@ async function internalMaximum<T>(
 
     return max;
 }
+
+export async function maximumBy<T>(
+    iterable: AsyncIterableLike<T>,
+    select: (element: T, index: number) => number | Promise<number>
+): Promise<T | null> {
+    const iterator = asyncIterator(iterable);
+    let result = await iterator.next();
+
+    if (result.done === true) {
+        return null;
+    }
+
+    let max = result.value;
+    let maxBy = await select(result.value, 0);
+    let i = 0;
+
+    result = await iterator.next();
+    while (result.done !== true) {
+        const by = await select(result.value, i++);
+        if (by > maxBy) {
+            max = result.value;
+            maxBy = by;
+        }
+        result = await iterator.next();
+    }
+
+    return max;
+}
+
+export const asyncMaximumBy = maximumBy;
+
+export function maximumByFn<T>(
+    select: (element: T, index: number) => number | Promise<number>
+): (iterable: AsyncIterableLike<T>) => Promise<T | null> {
+    return async iterable => maximumBy(iterable, select);
+}
+
+export const asyncMaximumByFn = maximumByFn;
