@@ -27,6 +27,7 @@ import {
     minimumBy,
     notEmpty,
     only,
+    or,
     prefixMatch,
     product,
     push,
@@ -276,4 +277,10 @@ test("and", async t => {
     t.true(await and(asyncIterable([true, true, true])));
     t.false(await and(asyncIterable([true, false, true])));
     t.true(await and(asyncIterable([])));
+});
+
+test("or", async t => {
+    t.true(await or(asyncIterable([true, false, true])));
+    t.false(await or(asyncIterable([false, false, false])));
+    t.false(await or(asyncIterable([])));
 });

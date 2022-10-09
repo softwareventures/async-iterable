@@ -853,3 +853,9 @@ export async function and(iterable: AsyncIterableLike<boolean>): Promise<boolean
 }
 
 export const asyncAnd = and;
+
+export async function or(iterable: AsyncIterableLike<boolean>): Promise<boolean> {
+    return (await findIndex(iterable, Boolean)) != null;
+}
+
+export const asyncOr = or;
