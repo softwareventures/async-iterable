@@ -880,3 +880,15 @@ export async function all<T>(
 }
 
 export const asyncAll = all;
+
+export async function* concat<T>(
+    iterables: AsyncIterableLike<AsyncIterableLike<T>>
+): AsyncIterable<T> {
+    for await (const iterable of await iterables) {
+        for await (const element of iterable) {
+            yield element;
+        }
+    }
+}
+
+export const asyncConcat = concat;

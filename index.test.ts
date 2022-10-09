@@ -5,6 +5,7 @@ import {
     any,
     asyncIterable,
     average,
+    concat,
     contains,
     drop,
     dropWhile,
@@ -295,4 +296,21 @@ test("any", async t => {
 test("all", async t => {
     t.true(await all(asyncIterable([1, 2, 3]), e => e < 4));
     t.false(await all(asyncIterable([1, 2, 3]), e => e > 2));
+});
+
+test("concat", async t => {
+    t.deepEqual(
+        await toArray(
+            concat(
+                asyncIterable([
+                    asyncIterable([1, 2]),
+                    asyncIterable([]),
+                    asyncIterable([3]),
+                    asyncIterable([4, 5])
+                ])
+            )
+        ),
+        [1, 2, 3, 4, 5]
+    );
+    t.deepEqual(await toArray(concat(asyncIterable([asyncIterable([]), asyncIterable([])]))), []);
 });
