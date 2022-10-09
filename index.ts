@@ -509,3 +509,15 @@ export function removeFn<T>(value: T): (iterable: AsyncIterableLike<T>) => Async
 }
 
 export const asyncRemoveFn = removeFn;
+
+export function removeFirst<T>(iterable: AsyncIterableLike<T>, value: T): AsyncIterable<T> {
+    return excludeFirst(iterable, element => element === value);
+}
+
+export const asyncRemoveFirst = removeFirst;
+
+export function removeFirstFn<T>(value: T): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return iterable => removeFirst(iterable, value);
+}
+
+export const asyncRemoveFirstFn = removeFirstFn;

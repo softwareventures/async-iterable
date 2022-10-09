@@ -17,6 +17,7 @@ import {
     prefixMatch,
     push,
     remove,
+    removeFirst,
     tail,
     take,
     takeWhile,
@@ -175,4 +176,11 @@ test("excludeFirst", async t => {
 
 test("remove", async t => {
     t.deepEqual(await toArray(remove(asyncIterable([1, 2, 3, 4, 3, 2, 1]), 3)), [1, 2, 4, 2, 1]);
+});
+
+test("removeFirst", async t => {
+    t.deepEqual(
+        await toArray(removeFirst(asyncIterable([1, 2, 3, 4, 3, 2, 1]), 3)),
+        [1, 2, 4, 3, 2, 1]
+    );
 });
