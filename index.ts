@@ -824,3 +824,9 @@ export function minimumByFn<T>(
 }
 
 export const asyncMinimumByFn = minimumByFn;
+
+export async function sum(iterable: AsyncIterableLike<number>): Promise<number> {
+    return fold(iterable, (sum, element) => sum + element, 0);
+}
+
+export const asyncSum = sum;

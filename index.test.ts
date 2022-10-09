@@ -29,6 +29,7 @@ import {
     push,
     remove,
     removeFirst,
+    sum,
     tail,
     take,
     takeWhile,
@@ -249,4 +250,9 @@ test("minimumBy", async t => {
     t.is(await minimumBy(asyncIterable(["1", "2", "3"]), Number), "1");
     t.is(await minimumBy(asyncIterable(["2", "3", "4", "1", "2", "3"]), Number), "1");
     t.is(await minimumBy(asyncIterable([]), Number), null);
+});
+
+test("sum", async t => {
+    t.is(await sum(asyncIterable([1, 2, 3])), 6);
+    t.is(await sum(asyncIterable([])), 0);
 });
