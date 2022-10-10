@@ -3,6 +3,7 @@ import {
     all,
     and,
     any,
+    append,
     asyncIterable,
     average,
     concat,
@@ -326,4 +327,16 @@ test("prepend", async t => {
         [4, 5, 6]
     );
     t.deepEqual(await toArray(prepend(asyncIterable([1, 2, 3]))(asyncIterable([]))), [1, 2, 3]);
+});
+
+test("append", async t => {
+    t.deepEqual(
+        await toArray(append(asyncIterable([4, 5, 6]))(asyncIterable([1, 2, 3]))),
+        [1, 2, 3, 4, 5, 6]
+    );
+    t.deepEqual(
+        await toArray(append(asyncIterable<number>([]))(asyncIterable([1, 2, 3]))),
+        [1, 2, 3]
+    );
+    t.deepEqual(await toArray(append(asyncIterable([4, 5, 6]))(asyncIterable([]))), [4, 5, 6]);
 });

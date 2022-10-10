@@ -898,3 +898,9 @@ export function prepend<T>(a: AsyncIterableLike<T>): (b: AsyncIterableLike<T>) =
 }
 
 export const asyncPrepend = prepend;
+
+export function append<T>(b: AsyncIterableLike<T>): (a: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return a => concat([a, b]);
+}
+
+export const asyncAppend = append;
