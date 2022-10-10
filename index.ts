@@ -921,3 +921,18 @@ export function concatMapFn<T, U>(
 }
 
 export const asyncConcatMapFn = concatMapFn;
+
+export async function noneNull<T>(
+    iterable: AsyncIterableLike<T | null | undefined>
+): Promise<T[] | null> {
+    const result: T[] = [];
+
+    for await (const element of await iterable) {
+        if (element == null) {
+            return null;
+        }
+        result.push(element);
+    }
+
+    return result;
+}

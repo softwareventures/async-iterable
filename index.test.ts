@@ -30,6 +30,7 @@ import {
     maximumBy,
     minimum,
     minimumBy,
+    noneNull,
     notEmpty,
     only,
     or,
@@ -351,4 +352,11 @@ test("concatMap", async t => {
         "5",
         "6"
     ]);
+});
+
+test("noneNull", async t => {
+    t.deepEqual(await noneNull(asyncIterable([1, 2, 3])), [1, 2, 3]);
+    t.is(await noneNull(asyncIterable([1, null, 3])), null);
+    t.is(await noneNull(asyncIterable([undefined, 2, 3])), null);
+    t.deepEqual(await noneNull(asyncIterable([])), []);
 });
