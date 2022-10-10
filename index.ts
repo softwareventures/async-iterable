@@ -936,3 +936,26 @@ export async function noneNull<T>(
 
     return result;
 }
+
+export async function* scan<T, U>(
+    iterable: AsyncIterableLike<T>,
+    f: (accumulator: U, element: T, index: number) => U | Promise<U>,
+    initial: U
+): AsyncIterable<U> {
+    let i = 0;
+    let accumulator = initial;
+    for await (const element of await iterable) {
+        yield (accumulator = await f(accumulator, element, i++));
+    }
+}
+
+export const asyncScan = scan;
+
+export function scanFn<T, U>(
+    f: (accumulator: U, element: T, index: number) => U | Promise<U>,
+    initial: U
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<U> {
+    return iterable => scan(iterable, f, initial);
+}
+
+export const asyncScanFn = scanFn;

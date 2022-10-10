@@ -40,6 +40,7 @@ import {
     push,
     remove,
     removeFirst,
+    scan,
     sum,
     tail,
     take,
@@ -359,4 +360,13 @@ test("noneNull", async t => {
     t.is(await noneNull(asyncIterable([1, null, 3])), null);
     t.is(await noneNull(asyncIterable([undefined, 2, 3])), null);
     t.deepEqual(await noneNull(asyncIterable([])), []);
+});
+
+test("scan", async t => {
+    t.deepEqual(await toArray(scan([1, 2, 3], (a, e, i) => a + e * i, 0)), [0, 2, 8]);
+    t.deepEqual(await toArray(scan(["a", "b", "c"], (a, e, i) => `${a} ${i} ${e}`, "_")), [
+        "_ 0 a",
+        "_ 0 a 1 b",
+        "_ 0 a 1 b 2 c"
+    ]);
 });
