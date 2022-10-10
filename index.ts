@@ -959,3 +959,32 @@ export function scanFn<T, U>(
 }
 
 export const asyncScanFn = scanFn;
+
+export async function* scan1<T>(
+    iterable: AsyncIterableLike<T>,
+    f: (accumulator: T, element: T, index: number) => T | Promise<T>
+): AsyncIterable<T> {
+    const iterator = asyncIterator(iterable);
+    let result = await iterator.next();
+
+    if (result.done === true) {
+        return;
+    }
+
+    let accumulator = result.value;
+    yield accumulator;
+    let i = 1;
+    result = await iterator.next();
+    while (result.done !== true) {
+        yield (accumulator = await f(accumulator, result.value, i++));
+        result = await iterator.next();
+    }
+}
+
+export const asyncScan1 = scan1;
+
+export function scan1Fn<T>(
+    f: (accumulator: T, element: T, index: number) => T | Promise<T>
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return iterable => scan1(iterable, f);
+}

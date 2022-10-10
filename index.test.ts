@@ -41,6 +41,7 @@ import {
     remove,
     removeFirst,
     scan,
+    scan1,
     sum,
     tail,
     take,
@@ -369,4 +370,8 @@ test("scan", async t => {
         "_ 0 a 1 b",
         "_ 0 a 1 b 2 c"
     ]);
+});
+
+test("scan1", async t => {
+    t.deepEqual(await toArray(scan1(asyncIterable([1, 2, 3]), (a, e, i) => a + e * i)), [1, 3, 9]);
 });
