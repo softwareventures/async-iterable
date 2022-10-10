@@ -47,7 +47,8 @@ import {
     take,
     takeWhile,
     toArray,
-    unshift
+    unshift,
+    zip
 } from "./index";
 
 test("tail", async t => {
@@ -374,4 +375,12 @@ test("scan", async t => {
 
 test("scan1", async t => {
     t.deepEqual(await toArray(scan1(asyncIterable([1, 2, 3]), (a, e, i) => a + e * i)), [1, 3, 9]);
+});
+
+test("zip", async t => {
+    t.deepEqual(await toArray(zip(asyncIterable([1, 2, 3]), asyncIterable([6, 5, 4, 3, 2, 1]))), [
+        [1, 6],
+        [2, 5],
+        [3, 4]
+    ]);
 });

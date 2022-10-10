@@ -988,3 +988,31 @@ export function scan1Fn<T>(
 ): (iterable: AsyncIterableLike<T>) => AsyncIterable<T> {
     return iterable => scan1(iterable, f);
 }
+
+export async function* zip<T, U>(
+    a: AsyncIterableLike<T>,
+    b: AsyncIterableLike<U>
+): AsyncIterable<readonly [T, U]> {
+    const ait = asyncIterator(a);
+    const bit = asyncIterator(b);
+
+    let ar = await ait.next();
+    let br = await bit.next();
+
+    while (ar.done !== true && br.done !== true) {
+        yield [ar.value, br.value];
+
+        ar = await ait.next();
+        br = await bit.next();
+    }
+}
+
+export const asyncZip = zip;
+
+export function zipFn<T, U>(
+    b: AsyncIterableLike<U>
+): (a: AsyncIterableLike<T>) => AsyncIterable<readonly [T, U]> {
+    return a => zip(a, b);
+}
+
+export const asyncZipFn = zipFn;
