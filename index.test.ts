@@ -7,6 +7,7 @@ import {
     asyncIterable,
     average,
     concat,
+    concatMap,
     contains,
     drop,
     dropWhile,
@@ -339,4 +340,15 @@ test("append", async t => {
         [1, 2, 3]
     );
     t.deepEqual(await toArray(append(asyncIterable([4, 5, 6]))(asyncIterable([]))), [4, 5, 6]);
+});
+
+test("concatMap", async t => {
+    t.deepEqual(await toArray(concatMap(asyncIterable(["1,2,3", "4,5,6"]), s => s.split(","))), [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+    ]);
 });

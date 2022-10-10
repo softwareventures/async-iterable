@@ -904,3 +904,20 @@ export function append<T>(b: AsyncIterableLike<T>): (a: AsyncIterableLike<T>) =>
 }
 
 export const asyncAppend = append;
+
+export function concatMap<T, U>(
+    iterable: AsyncIterableLike<T>,
+    f: (element: T, index: number) => AsyncIterableLike<U>
+): AsyncIterable<U> {
+    return concat(map(iterable, f));
+}
+
+export const asyncConcatMap = concatMap;
+
+export function concatMapFn<T, U>(
+    f: (element: T, index: number) => AsyncIterableLike<U>
+): (iterable: AsyncIterableLike<T>) => AsyncIterable<U> {
+    return iterable => concatMap(iterable, f);
+}
+
+export const asyncConcatMapFn = concatMapFn;
