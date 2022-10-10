@@ -32,6 +32,7 @@ import {
     only,
     or,
     prefixMatch,
+    prepend,
     product,
     push,
     remove,
@@ -313,4 +314,16 @@ test("concat", async t => {
         [1, 2, 3, 4, 5]
     );
     t.deepEqual(await toArray(concat(asyncIterable([asyncIterable([]), asyncIterable([])]))), []);
+});
+
+test("prepend", async t => {
+    t.deepEqual(
+        await toArray(prepend(asyncIterable([1, 2, 3]))(asyncIterable([4, 5, 6]))),
+        [1, 2, 3, 4, 5, 6]
+    );
+    t.deepEqual(
+        await toArray(prepend(asyncIterable<number>([]))(asyncIterable([4, 5, 6]))),
+        [4, 5, 6]
+    );
+    t.deepEqual(await toArray(prepend(asyncIterable([1, 2, 3]))(asyncIterable([]))), [1, 2, 3]);
 });

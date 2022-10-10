@@ -892,3 +892,9 @@ export async function* concat<T>(
 }
 
 export const asyncConcat = concat;
+
+export function prepend<T>(a: AsyncIterableLike<T>): (b: AsyncIterableLike<T>) => AsyncIterable<T> {
+    return b => concat([a, b]);
+}
+
+export const asyncPrepend = prepend;
