@@ -1016,3 +1016,25 @@ export function zipFn<T, U>(
 }
 
 export const asyncZipFn = zipFn;
+
+export async function keyLastBy<TKey, TElement>(
+    iterable: AsyncIterableLike<TElement>,
+    f: (element: TElement, index: number) => TKey
+): Promise<Map<TKey, TElement>> {
+    const map = new Map<TKey, TElement>();
+    let i = 0;
+    for await (const element of await iterable) {
+        map.set(f(element, i++), element);
+    }
+    return map;
+}
+
+export const asyncKeyLastBy = keyLastBy;
+
+export function keyLastByFn<TKey, TElement>(
+    f: (element: TElement, index: number) => TKey
+): (iterable: AsyncIterableLike<TElement>) => Promise<Map<TKey, TElement>> {
+    return async iterable => keyLastBy(iterable, f);
+}
+
+export const asyncKeyLastByFn = keyLastByFn;
