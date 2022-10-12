@@ -25,6 +25,7 @@ import {
     indexOf,
     initial,
     keyBy,
+    keyFirstBy,
     keyLastBy,
     last,
     map,
@@ -392,6 +393,16 @@ test("keyBy", async t => {
     t.deepEqual(Array.from(map.entries()), [
         ["odd", [1, 3, 5]],
         ["even", [4, 2, 6]]
+    ]);
+});
+
+test("keyFirstBy", async t => {
+    const map = await keyFirstBy(asyncIterable([1, 3, 4, 2, 5, 6]), e =>
+        e % 2 === 0 ? "even" : "odd"
+    );
+    t.deepEqual(Array.from(map.entries()), [
+        ["odd", 1],
+        ["even", 4]
     ]);
 });
 
