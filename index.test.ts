@@ -24,6 +24,7 @@ import {
     index,
     indexOf,
     initial,
+    keyBy,
     keyLastBy,
     last,
     map,
@@ -383,6 +384,14 @@ test("zip", async t => {
         [1, 6],
         [2, 5],
         [3, 4]
+    ]);
+});
+
+test("keyBy", async t => {
+    const map = await keyBy(asyncIterable([1, 3, 4, 2, 5, 6]), e => (e % 2 === 0 ? "even" : "odd"));
+    t.deepEqual(Array.from(map.entries()), [
+        ["odd", [1, 3, 5]],
+        ["even", [4, 2, 6]]
     ]);
 });
 
