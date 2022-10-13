@@ -45,6 +45,7 @@ import {
     removeFirst,
     scan,
     scan1,
+    slice,
     sum,
     tail,
     take,
@@ -97,6 +98,14 @@ test("notEmpty", async t => {
     t.is(await notEmpty(asyncIterable([])), false);
     t.is(await notEmpty(asyncIterable([1])), true);
     t.is(await notEmpty(asyncIterable([1, 2, 3])), true);
+});
+
+test("slice", async t => {
+    t.deepEqual(await toArray(slice(asyncIterable([1, 2, 3, 4]), 1)), [2, 3, 4]);
+    t.deepEqual(await toArray(slice(asyncIterable([1, 2, 3, 4, 5]), 1, 4)), [2, 3, 4]);
+    t.deepEqual(await toArray(slice(asyncIterable([1, 2, 3]), 2)), [3]);
+    t.deepEqual(await toArray(slice(asyncIterable([1, 2, 3]), 0, 2)), [1, 2]);
+    t.deepEqual(await toArray(slice(asyncIterable([]), 3, 5)), []);
 });
 
 test("take", async t => {

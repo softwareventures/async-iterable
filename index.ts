@@ -156,6 +156,31 @@ export async function notEmpty(iterable: AsyncIterableLike<unknown>): Promise<bo
 
 export const asyncNotEmpty = notEmpty;
 
+export async function* slice<T>(
+    iterable: AsyncIterableLike<T>,
+    start: number | Promise<number> = 0,
+    end: number | Promise<number> = Infinity
+): AsyncIterable<T> {
+    const s = await start;
+    const e = await end;
+
+    if (e === s) {
+        return;
+    }
+
+    const iterator = asyncIterator(iterable);
+    let element = await iterator.next();
+
+    for (let i = 0; i < s && element.done !== true; ++i) {
+        element = await iterator.next();
+    }
+
+    for (let i = s; i < e && element.done !== true; ++i) {
+        yield element.value;
+        element = await iterator.next();
+    }
+}
+
 export async function* take<T>(
     iterable: AsyncIterableLike<T>,
     count: number | Promise<number>
