@@ -58,10 +58,10 @@ export async function* tail<T>(iterable: AsyncIterableLike<T>): AsyncIterable<T>
     const iterator = asyncIterator(iterable);
     await iterator.next();
 
-    let result = await iterator.next();
-    while (result.done !== true) {
-        yield result.value;
-        result = await iterator.next();
+    let element = await iterator.next();
+    while (element.done !== true) {
+        yield element.value;
+        element = await iterator.next();
     }
 }
 
@@ -191,14 +191,14 @@ export async function* drop<T>(
 ): AsyncIterable<T> {
     const iterator = asyncIterator(iterable);
     const c = await count;
-    let result = await iterator.next();
-    for (let i = 0; i < c && result.done !== true; ++i) {
-        result = await iterator.next();
+    let element = await iterator.next();
+    for (let i = 0; i < c && element.done !== true; ++i) {
+        element = await iterator.next();
     }
 
-    while (result.done !== true) {
-        yield result.value;
-        result = await iterator.next();
+    while (element.done !== true) {
+        yield element.value;
+        element = await iterator.next();
     }
 }
 
@@ -272,14 +272,14 @@ export async function* dropWhile<T>(
     predicate: (element: T, index: number) => boolean | Promise<boolean>
 ): AsyncIterable<T> {
     const iterator = asyncIterator(iterable);
-    let result = await iterator.next();
-    for (let i = 0; result.done !== true && (await predicate(result.value, i)); ++i) {
-        result = await iterator.next();
+    let element = await iterator.next();
+    for (let i = 0; element.done !== true && (await predicate(element.value, i)); ++i) {
+        element = await iterator.next();
     }
 
-    while (result.done !== true) {
-        yield result.value;
-        result = await iterator.next();
+    while (element.done !== true) {
+        yield element.value;
+        element = await iterator.next();
     }
 }
 
@@ -479,23 +479,23 @@ export async function* excludeFirst<T>(
     predicate: (element: T, index: number) => boolean | Promise<boolean>
 ): AsyncIterable<T> {
     const iterator = asyncIterator(iterable);
-    let result = await iterator.next();
+    let element = await iterator.next();
 
-    for (let i = 0; result.done !== true; ++i) {
-        if (await predicate(result.value, i)) {
+    for (let i = 0; element.done !== true; ++i) {
+        if (await predicate(element.value, i)) {
             break;
         }
-        yield result.value;
-        result = await iterator.next();
+        yield element.value;
+        element = await iterator.next();
     }
 
-    if (result.done !== true) {
-        result = await iterator.next();
+    if (element.done !== true) {
+        element = await iterator.next();
     }
 
-    while (result.done !== true) {
-        yield result.value;
-        result = await iterator.next();
+    while (element.done !== true) {
+        yield element.value;
+        element = await iterator.next();
     }
 }
 
@@ -562,18 +562,18 @@ export async function fold1<T>(
     f: (accumulator: T, element: T, index: number) => T | Promise<T>
 ): Promise<T> {
     const iterator = asyncIterator(iterable);
-    let result = await iterator.next();
+    let element = await iterator.next();
 
-    if (result.done === true) {
+    if (element.done === true) {
         throw new TypeError("fold1: empty AsyncIterable");
     }
 
-    let accumulator = result.value;
+    let accumulator = element.value;
     let i = 1;
-    result = await iterator.next();
-    while (result.done !== true) {
-        accumulator = await f(accumulator, result.value, i++);
-        result = await iterator.next();
+    element = await iterator.next();
+    while (element.done !== true) {
+        accumulator = await f(accumulator, element.value, i++);
+        element = await iterator.next();
     }
 
     return accumulator;
@@ -735,19 +735,19 @@ async function internalMaximum<T>(
     compare: Comparator<T>
 ): Promise<T | null> {
     const iterator = asyncIterator(iterable);
-    let result = await iterator.next();
+    let element = await iterator.next();
 
-    if (result.done === true) {
+    if (element.done === true) {
         return null;
     }
 
-    let max = result.value;
-    result = await iterator.next();
-    while (result.done !== true) {
-        if (compare(result.value, max) > 0) {
-            max = result.value;
+    let max = element.value;
+    element = await iterator.next();
+    while (element.done !== true) {
+        if (compare(element.value, max) > 0) {
+            max = element.value;
         }
-        result = await iterator.next();
+        element = await iterator.next();
     }
 
     return max;
@@ -758,24 +758,24 @@ export async function maximumBy<T>(
     select: (element: T, index: number) => number | Promise<number>
 ): Promise<T | null> {
     const iterator = asyncIterator(iterable);
-    let result = await iterator.next();
+    let element = await iterator.next();
 
-    if (result.done === true) {
+    if (element.done === true) {
         return null;
     }
 
-    let max = result.value;
-    let maxBy = await select(result.value, 0);
+    let max = element.value;
+    let maxBy = await select(element.value, 0);
     let i = 0;
 
-    result = await iterator.next();
-    while (result.done !== true) {
-        const by = await select(result.value, i++);
+    element = await iterator.next();
+    while (element.done !== true) {
+        const by = await select(element.value, i++);
         if (by > maxBy) {
-            max = result.value;
+            max = element.value;
             maxBy = by;
         }
-        result = await iterator.next();
+        element = await iterator.next();
     }
 
     return max;
@@ -975,19 +975,19 @@ export async function* scan1<T>(
     f: (accumulator: T, element: T, index: number) => T | Promise<T>
 ): AsyncIterable<T> {
     const iterator = asyncIterator(iterable);
-    let result = await iterator.next();
+    let element = await iterator.next();
 
-    if (result.done === true) {
+    if (element.done === true) {
         return;
     }
 
-    let accumulator = result.value;
+    let accumulator = element.value;
     yield accumulator;
     let i = 1;
-    result = await iterator.next();
-    while (result.done !== true) {
-        yield (accumulator = await f(accumulator, result.value, i++));
-        result = await iterator.next();
+    element = await iterator.next();
+    while (element.done !== true) {
+        yield (accumulator = await f(accumulator, element.value, i++));
+        element = await iterator.next();
     }
 }
 
