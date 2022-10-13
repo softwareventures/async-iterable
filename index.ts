@@ -34,6 +34,16 @@ export async function toArray<T>(iterable: AsyncIterableLike<T>): Promise<T[]> {
 
 export const asyncToArray = toArray;
 
+export async function toSet<T>(iterable: AsyncIterableLike<T>): Promise<Set<T>> {
+    const set = new Set<T>();
+    for await (const element of await iterable) {
+        set.add(element);
+    }
+    return set;
+}
+
+export const asyncToSet = toSet;
+
 export async function first<T>(iterable: AsyncIterableLike<T>): Promise<T | null> {
     for await (const element of await iterable) {
         return element;
