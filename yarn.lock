@@ -256,14 +256,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@es-joy/jsdoccomment@npm:~0.31.0":
-  version: 0.31.0
-  resolution: "@es-joy/jsdoccomment@npm:0.31.0"
+"@es-joy/jsdoccomment@npm:~0.33.0":
+  version: 0.33.0
+  resolution: "@es-joy/jsdoccomment@npm:0.33.0"
   dependencies:
     comment-parser: 1.3.1
     esquery: ^1.4.0
     jsdoc-type-pratt-parser: ~3.1.0
-  checksum: 1691ff501559f45593e5f080d2c08dea4fadba5f48e526b9ff2943c050fbb40408f5e83968542e5b6bf47219c7573796d00bfe80dacfd1ba8187904cc475cefb
+  checksum: fe91f9d236fbae44b752b65d95fc6174f89f9b90b9a4cc270247f1f64ed1fe50b438f01303738677ee8c18e5746266bd65e3cba68708bf8190d503039e417f45
   languageName: node
   linkType: hard
 
@@ -854,7 +854,7 @@ __metadata:
     eslint: 8.23.1
     eslint-config-prettier: 8.5.0
     eslint-plugin-import: 2.26.0
-    eslint-plugin-jsdoc: 39.3.6
+    eslint-plugin-jsdoc: 39.3.14
     eslint-plugin-prefer-arrow: 1.2.3
     eslint-plugin-sonarjs: 0.15.0
     husky: 8.0.1
@@ -2747,20 +2747,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:39.3.6":
-  version: 39.3.6
-  resolution: "eslint-plugin-jsdoc@npm:39.3.6"
+"eslint-plugin-jsdoc@npm:39.3.14":
+  version: 39.3.14
+  resolution: "eslint-plugin-jsdoc@npm:39.3.14"
   dependencies:
-    "@es-joy/jsdoccomment": ~0.31.0
+    "@es-joy/jsdoccomment": ~0.33.0
     comment-parser: 1.3.1
     debug: ^4.3.4
     escape-string-regexp: ^4.0.0
     esquery: ^1.4.0
-    semver: ^7.3.7
+    semver: ^7.3.8
     spdx-expression-parse: ^3.0.1
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
-  checksum: 0825a5eba6cdcb250e45cd5ad488bd234da346f324a11160ad4b8c9fb3c76d8e1457d462fa91c24f11bdff5ef0013375d65c366b648202254c4bcc79eed89060
+  checksum: 448cc78968a9d3481c21d1a2e99be4e8ccb73c9669ae0949df68957d8c219471501f68eb02095f869d91fde8c3d135563492fce5128523325d81dc5eb8112a15
   languageName: node
   linkType: hard
 
@@ -6415,7 +6415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.1.2, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7":
+"semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.1.2, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8":
   version: 7.3.8
   resolution: "semver@npm:7.3.8"
   dependencies:
