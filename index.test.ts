@@ -30,6 +30,7 @@ import {
     last,
     map,
     mapKeyBy,
+    mapKeyFirstBy,
     maximum,
     maximumBy,
     minimum,
@@ -433,5 +434,15 @@ test("mapKeyBy", async t => {
     ]);
     t.deepEqual(map.get("even"), ["4", "2", "6"]);
     t.deepEqual(map.get("odd"), ["1", "3", "5"]);
+    t.deepEqual(Array.from(map.keys()), ["odd", "even"]);
+});
+
+test("mapKeyFirstBy", async t => {
+    const map = await mapKeyFirstBy(asyncIterable([1, 3, 4, 2, 5, 6]), e => [
+        e % 2 === 0 ? "even" : "odd",
+        String(e)
+    ]);
+    t.is(map.get("even"), "4");
+    t.is(map.get("odd"), "1");
     t.deepEqual(Array.from(map.keys()), ["odd", "even"]);
 });
