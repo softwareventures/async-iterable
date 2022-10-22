@@ -474,6 +474,8 @@ export function filterFn<T>(
     return iterable => filter(iterable, predicate);
 }
 
+export const asyncFilterFn = filterFn;
+
 export function exclude<T>(
     iterable: AsyncIterableLike<T>,
     predicate: (element: T, index: number) => boolean | Promise<boolean>
