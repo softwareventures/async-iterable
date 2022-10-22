@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@softwareventures/async-iterable",
   "version": "0.0.0-development",
   "description": "Pure functional AsyncIterable traversal",
