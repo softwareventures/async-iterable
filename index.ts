@@ -974,6 +974,8 @@ export async function noneNull<T>(
     return result;
 }
 
+export const asyncNoneNull = noneNull;
+
 export async function* scan<T, U>(
     iterable: AsyncIterableLike<T>,
     f: (accumulator: U, element: T, index: number) => U | Promise<U>,
