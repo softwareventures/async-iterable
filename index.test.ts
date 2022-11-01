@@ -109,6 +109,8 @@ test("slice", async t => {
     t.deepEqual(await toArray(slice(asyncIterable([1, 2, 3]), 2)), [3]);
     t.deepEqual(await toArray(slice(asyncIterable([1, 2, 3]), 0, 2)), [1, 2]);
     t.deepEqual(await toArray(slice(asyncIterable([]), 3, 5)), []);
+    t.deepEqual(await toArray(slice(asyncIterable([1, 2, 3]), 2, 0)), []);
+    t.deepEqual(await toArray(slice(asyncIterable([1, 2, 3]), 1, 1)), []);
 });
 
 test("take", async t => {
