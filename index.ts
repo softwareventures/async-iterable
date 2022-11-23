@@ -1028,6 +1028,22 @@ export function scan1Fn<T>(
     return iterable => scan1(iterable, f);
 }
 
+export async function* pairwise<T>(iterable: AsyncIterableLike<T>): AsyncIterable<readonly [T, T]> {
+    const iterator = asyncIterator(iterable);
+    let prev = await iterator.next();
+
+    if (prev.done === true) {
+        return;
+    }
+
+    let element = await iterator.next();
+    while (element.done !== true) {
+        yield [prev.value, element.value];
+        prev = element;
+        element = await iterator.next();
+    }
+}
+
 export async function* zip<T, U>(
     a: AsyncIterableLike<T>,
     b: AsyncIterableLike<U>

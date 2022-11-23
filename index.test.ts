@@ -40,6 +40,7 @@ import {
     notEmpty,
     only,
     or,
+    pairwise,
     prefixMatch,
     prepend,
     product,
@@ -392,6 +393,18 @@ test("scan", async t => {
 
 test("scan1", async t => {
     t.deepEqual(await toArray(scan1(asyncIterable([1, 2, 3]), (a, e, i) => a + e * i)), [1, 3, 9]);
+});
+
+test("pairwise", async t => {
+    t.deepEqual(await toArray(pairwise(asyncIterable([]))), []);
+    t.deepEqual(await toArray(pairwise(asyncIterable([1]))), []);
+    t.deepEqual(await toArray(pairwise(asyncIterable([1, 2]))), [[1, 2]]);
+    t.deepEqual(await toArray(pairwise(asyncIterable([1, 2, 3, 4, 5]))), [
+        [1, 2],
+        [2, 3],
+        [3, 4],
+        [4, 5]
+    ]);
 });
 
 test("zip", async t => {
