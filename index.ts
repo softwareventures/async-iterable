@@ -757,6 +757,8 @@ export function maximumFn<T>(
     return async iterable => maximum(iterable, compare);
 }
 
+export const asyncMaximumFn = maximumFn;
+
 async function internalMaximum<T>(
     iterable: AsyncIterableLike<T>,
     compare: Comparator<T>
