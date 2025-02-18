@@ -976,7 +976,7 @@ __metadata:
     "@commitlint/cli": "npm:17.8.1"
     "@commitlint/config-conventional": "npm:17.8.1"
     "@commitlint/cz-commitlint": "npm:17.8.1"
-    "@softwareventures/eslint-config": "npm:7.1.5"
+    "@softwareventures/eslint-config": "npm:7.9.0"
     "@softwareventures/nullable": "npm:^2.0.0 || ^3.0.0"
     "@softwareventures/ordered": "npm:^1.1.0 || ^2.0.0"
     "@softwareventures/precise-commits": "npm:3.0.35"
@@ -1007,22 +1007,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@softwareventures/eslint-config@npm:7.1.5":
-  version: 7.1.5
-  resolution: "@softwareventures/eslint-config@npm:7.1.5"
+"@softwareventures/eslint-config@npm:7.9.0":
+  version: 7.9.0
+  resolution: "@softwareventures/eslint-config@npm:7.9.0"
   dependencies:
     tslib: "npm:^2.3.1"
   peerDependencies:
-    "@typescript-eslint/eslint-plugin": ^5.3.0 || ^6.0.0
-    "@typescript-eslint/parser": ^5.3.0 || ^6.0.0
+    "@typescript-eslint/eslint-plugin": ^5.3.0 || ^6.0.0 || ^7.0.0
+    "@typescript-eslint/parser": ^5.3.0 || ^6.0.0 || ^7.0.0
     eslint: ^7.0.0 || ^8.0.0
     eslint-config-prettier: ^8.3.0 || ^9.0.0
     eslint-plugin-import: ^2.25.2
-    eslint-plugin-jsdoc: ^37.0.3 || ^38.0.0 || ^39.0.0 || ^40.0.0 || ^41.0.0 || ^42.0.0 || ^43.0.0 || ^44.0.0 || ^45.0.0 || ^46.0.0 || ^47.0.0 || ^48.0.0
+    eslint-plugin-jsdoc: ^37.0.3 || ^38.0.0 || ^39.0.0 || ^40.0.0 || ^41.0.0 || ^42.0.0 || ^43.0.0 || ^44.0.0 || ^45.0.0 || ^46.0.0 || ^47.0.0 || ^48.0.0 || ^49.0.0 || ^50.0.0
     eslint-plugin-prefer-arrow: ^1.2.3
-    eslint-plugin-sonarjs: ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^0.14.0 || ^0.15.0 || ^0.16.0 || ^0.17.0 || ^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0
+    eslint-plugin-sonarjs: ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^0.14.0 || ^0.15.0 || ^0.16.0 || ^0.17.0 || ^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0 || ^1.0.0 || ^2.0.0
     typescript: ^3.8.3 || ^4.0.0 || ^5.0.0
-  checksum: 10c0/37989d8feb1851a24f318912121b9ba0300ecda2b6fc1d13414d14f355edab8250ab18bb78e2c039fb4cabdfe783c76c361e270a552af23a363c6d409c109eb3
+  checksum: 10c0/d710053777bc11d645b9ba632932030702c9d5786ae8a8f7d47e2b6eead312ebd6134ecfacb2001f610dce5878fac33de3fb671404e86a50174355272f8739fa
   languageName: node
   linkType: hard
 
