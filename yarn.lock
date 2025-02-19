@@ -1009,7 +1009,7 @@ __metadata:
     semantic-release: "npm:22.0.12"
     semantic-release-pinst: "npm:1.0.4"
     ts-node: "npm:10.9.2"
-    tslib: "npm:2.6.2"
+    tslib: "npm:2.8.1"
     typescript: "npm:4.9.5"
   languageName: unknown
   linkType: soft
