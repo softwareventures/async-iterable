@@ -986,7 +986,7 @@ __metadata:
     "@softwareventures/eslint-config": "npm:7.9.0"
     "@softwareventures/nullable": "npm:^2.0.0 || ^3.0.0"
     "@softwareventures/ordered": "npm:^1.1.0 || ^2.0.0"
-    "@softwareventures/precise-commits": "npm:3.0.35"
+    "@softwareventures/precise-commits": "npm:3.0.36"
     "@softwareventures/prettier-config": "npm:4.0.0"
     "@softwareventures/semantic-release-config": "npm:5.1.0"
     "@softwareventures/tsconfig": "npm:7.3.0"
@@ -1051,14 +1051,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@softwareventures/precise-commits@npm:3.0.35":
-  version: 3.0.35
-  resolution: "@softwareventures/precise-commits@npm:3.0.35"
+"@softwareventures/precise-commits@npm:3.0.36":
+  version: 3.0.36
+  resolution: "@softwareventures/precise-commits@npm:3.0.36"
   dependencies:
     "@softwareventures/array": "npm:6.1.0"
     "@softwareventures/nullable": "npm:3.2.0"
     execa: "npm:5.1.1"
-    find-up: "npm:5.0.0"
     glob: "npm:8.1.0"
     ignore: "npm:5.3.1"
     mri: "npm:1.2.0"
@@ -1070,7 +1069,7 @@ __metadata:
     prettier: ^1.8.0 || ^2.0.0
   bin:
     precise-commits: lib/cli.js
-  checksum: 10c0/f4e22bf8d05b24c0479d12c899b258a4a82c8e0e9b8b2d018ecb3e22c611072146712f5de6cd5ade54887bb6467406a5aeb16c5cb1305aeca67448e03d5f3cbb
+  checksum: 10c0/d9744d76a769ab5457514fb401250351e93558fd3cf761258b02ca6b0cf8fcbbdd1058e1504381518fc339c3d436340fe1bab654b8e59d3947a7437c541668a9
   languageName: node
   linkType: hard
 
@@ -3488,16 +3487,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-up@npm:5.0.0, find-up@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "find-up@npm:5.0.0"
-  dependencies:
-    locate-path: "npm:^6.0.0"
-    path-exists: "npm:^4.0.0"
-  checksum: 10c0/062c5a83a9c02f53cdd6d175a37ecf8f87ea5bbff1fdfb828f04bfa021441bc7583e8ebc0872a4c1baab96221fb8a8a275a19809fb93fbc40bd69ec35634069a
-  languageName: node
-  linkType: hard
-
 "find-up@npm:^2.0.0":
   version: 2.1.0
   resolution: "find-up@npm:2.1.0"
@@ -3514,6 +3503,16 @@ __metadata:
     locate-path: "npm:^5.0.0"
     path-exists: "npm:^4.0.0"
   checksum: 10c0/0406ee89ebeefa2d507feb07ec366bebd8a6167ae74aa4e34fb4c4abd06cf782a3ce26ae4194d70706f72182841733f00551c209fe575cb00bd92104056e78c1
+  languageName: node
+  linkType: hard
+
+"find-up@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "find-up@npm:5.0.0"
+  dependencies:
+    locate-path: "npm:^6.0.0"
+    path-exists: "npm:^4.0.0"
+  checksum: 10c0/062c5a83a9c02f53cdd6d175a37ecf8f87ea5bbff1fdfb828f04bfa021441bc7583e8ebc0872a4c1baab96221fb8a8a275a19809fb93fbc40bd69ec35634069a
   languageName: node
   linkType: hard
 
