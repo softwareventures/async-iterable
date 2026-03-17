@@ -56,7 +56,8 @@ import {
     takeWhile,
     toArray,
     unshift,
-    zip
+    zip,
+    zipStrict
 } from "./index";
 
 test("tail", async t => {
@@ -413,6 +414,21 @@ test("zip", async t => {
         [2, 5],
         [3, 4]
     ]);
+});
+
+test("zipStrict", async t => {
+    t.deepEqual(await toArray(zipStrict(asyncIterable([1, 2, 3]), asyncIterable([6, 5, 4]))), [
+        [1, 6],
+        [2, 5],
+        [3, 4]
+    ]);
+
+    await t.throwsAsync(
+        toArray(zipStrict(asyncIterable([1, 2, 3]), asyncIterable([6, 5, 4, 3, 2, 1]))),
+        {
+            instanceOf: RangeError
+        }
+    );
 });
 
 test("keyBy", async t => {

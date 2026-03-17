@@ -1046,9 +1046,42 @@ export async function* pairwise<T>(iterable: AsyncIterableLike<T>): AsyncIterabl
     }
 }
 
-export async function* zip<T, U>(
+export function zip<T, U>(
     a: AsyncIterableLike<T>,
     b: AsyncIterableLike<U>
+): AsyncIterable<readonly [T, U]> {
+    return zipInternal(a, b);
+}
+
+export const asyncZip = zip;
+
+export function zipFn<T, U>(
+    b: AsyncIterableLike<U>
+): (a: AsyncIterableLike<T>) => AsyncIterable<readonly [T, U]> {
+    return a => zip(a, b);
+}
+
+export const asyncZipFn = zipFn;
+
+export function zipStrict<T, U>(
+    a: AsyncIterableLike<T>,
+    b: AsyncIterableLike<U>
+): AsyncIterable<readonly [T, U]> {
+    return zipInternal(a, b, true);
+}
+
+export const asyncZipStrict = zipStrict;
+
+export function zipStrictFn<T, U>(
+    b: AsyncIterableLike<U>
+): (a: AsyncIterableLike<T>) => AsyncIterable<readonly [T, U]> {
+    return a => zipStrict(a, b);
+}
+
+async function* zipInternal<T, U>(
+    a: AsyncIterableLike<T>,
+    b: AsyncIterableLike<U>,
+    strict = false
 ): AsyncIterable<readonly [T, U]> {
     const ait = asyncIterator(a);
     const bit = asyncIterator(b);
@@ -1062,17 +1095,11 @@ export async function* zip<T, U>(
         ar = await ait.next();
         br = await bit.next();
     }
+
+    if (strict && (ar.done !== true || br.done !== true)) {
+        throw new RangeError("zipStrict: Iterables have different lengths");
+    }
 }
-
-export const asyncZip = zip;
-
-export function zipFn<T, U>(
-    b: AsyncIterableLike<U>
-): (a: AsyncIterableLike<T>) => AsyncIterable<readonly [T, U]> {
-    return a => zip(a, b);
-}
-
-export const asyncZipFn = zipFn;
 
 export async function keyBy<TKey, TElement>(
     iterable: AsyncIterableLike<TElement>,
