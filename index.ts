@@ -18,9 +18,7 @@ export function asyncIterator<T>(iterable: AsyncIterableLike<T>): AsyncIterator<
     return asyncIterable(iterable)[Symbol.asyncIterator]();
 }
 
-export function isAsyncIterable<T = unknown>(
-    value: AsyncIterable<T> | unknown
-): value is AsyncIterable<T> {
+export function isAsyncIterable(value: unknown): value is AsyncIterable<unknown> {
     return typeof value === "object" && value != null && Symbol.asyncIterator in value;
 }
 
