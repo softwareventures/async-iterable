@@ -43,11 +43,8 @@ export async function toSet<T>(iterable: AsyncIterableLike<T>): Promise<Set<T>> 
 export const asyncToSet = toSet;
 
 export async function first<T>(iterable: AsyncIterableLike<T>): Promise<T | null> {
-    for await (const element of await iterable) {
-        return element;
-    }
-
-    return null;
+    const result = await asyncIterator(iterable).next();
+    return result.done === true ? null : result.value;
 }
 
 export const asyncFirst = first;
