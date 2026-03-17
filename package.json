@@ -81,7 +81,7 @@
     "test": "ava"
   },
   "engines": {
-    "node": "^14 || ^16 || >=18"
+    "node": "^18, ^20 || ^22 || ^24 || >=25"
   },
   "dependencies": {
     "@softwareventures/nullable": "^2.0.0 || ^3.0.0",
