@@ -1,5 +1,10 @@
 import type {Comparator} from "@softwareventures/ordered";
-import {compare as defaultCompare, equal as defaultEqual, reverse} from "@softwareventures/ordered";
+import {
+    Comparison,
+    compare as defaultCompare,
+    equal as defaultEqual,
+    reverse
+} from "@softwareventures/ordered";
 import {isNotNull} from "@softwareventures/nullable";
 
 export type AsyncIterableLike<T> =
@@ -768,7 +773,7 @@ async function internalMaximum<T>(
     let max = element.value;
     element = await iterator.next();
     while (element.done !== true) {
-        if (compare(element.value, max) > 0) {
+        if (compare(element.value, max) > Comparison.equal) {
             max = element.value;
         }
         element = await iterator.next();
