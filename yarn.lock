@@ -144,19 +144,19 @@ __metadata:
   linkType: hard
 
 "@commitlint/load@npm:>6.1.1":
-  version: 21.2.0
-  resolution: "@commitlint/load@npm:21.2.0"
+  version: 21.2.2
+  resolution: "@commitlint/load@npm:21.2.2"
   dependencies:
     "@commitlint/config-validator": "npm:^21.2.0"
     "@commitlint/execute-rule": "npm:^21.0.1"
-    "@commitlint/resolve-extends": "npm:^21.2.0"
+    "@commitlint/resolve-extends": "npm:^21.2.2"
     "@commitlint/types": "npm:^21.2.0"
     cosmiconfig: "npm:^9.0.1"
     cosmiconfig-typescript-loader: "npm:^6.1.0"
     es-toolkit: "npm:^1.46.0"
     is-plain-obj: "npm:^4.1.0"
     picocolors: "npm:^1.1.1"
-  checksum: 10c0/e39080f3495ef4d2dc5e80d00e362d902e7ce487e3eed178a68098902f536f9fd68a2b061d879a1a6a487cfc1600f0cf019169d179925d226fedb661a7eefe59
+  checksum: 10c0/62ffdc1bcd5593baff0d8c5b592b41ab594ea08c7e1e4fee970ae63e2787232cdcf8e0a1c77ba922ec2adedca0b0017cc4d51d67b13208f477b80da4f36c3317
   languageName: node
   linkType: hard
 
@@ -222,16 +222,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/resolve-extends@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@commitlint/resolve-extends@npm:21.2.0"
+"@commitlint/resolve-extends@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@commitlint/resolve-extends@npm:21.2.2"
   dependencies:
     "@commitlint/config-validator": "npm:^21.2.0"
     "@commitlint/types": "npm:^21.2.0"
     es-toolkit: "npm:^1.46.0"
     global-directory: "npm:^5.0.0"
     resolve-from: "npm:^5.0.0"
-  checksum: 10c0/2267b98f36c7c5168b1768ce8a0b4a753bccf09731f010ce73cc171acb685759ca2feaef77c7e53f2914d728c496f7813b2d8e05e5f7423f6ce3ebb050b834dc
+  checksum: 10c0/0b6b39eabf21dc790b8c418e800a23e9d5ffeb73103552a8a0ba46bf3de5847727e10bbf2975acdf5f9cd620e96847892dd1fb656919148b644082368a6de8b5
   languageName: node
   linkType: hard
 
@@ -686,9 +686,9 @@ __metadata:
   linkType: hard
 
 "@tsconfig/node10@npm:^1.0.7":
-  version: 1.0.12
-  resolution: "@tsconfig/node10@npm:1.0.12"
-  checksum: 10c0/7bbbd7408cfaced86387a9b1b71cebc91c6fd701a120369735734da8eab1a4773fc079abd9f40c9e0b049e12586c8ac0e13f0da596bfd455b9b4c3faa813ebc5
+  version: 1.0.13
+  resolution: "@tsconfig/node10@npm:1.0.13"
+  checksum: 10c0/93a52ed460ac917938daaa23c1ffafa31a8b5d9f44e15d33ff20aa60c8cae5ad92fe0806d1a34fadb47be08ad5ee74273ed56dd79c76179c1a220e2fbfb72887
   languageName: node
   linkType: hard
 
@@ -989,9 +989,9 @@ __metadata:
   linkType: hard
 
 "ansi-regex@npm:^6.2.2":
-  version: 6.2.2
-  resolution: "ansi-regex@npm:6.2.2"
-  checksum: 10c0/05d4acb1d2f59ab2cf4b794339c7b168890d44dda4bf0ce01152a8da0213aca207802f930442ce8cd22d7a92f44907664aac6508904e75e038fa944d2601b30f
+  version: 6.3.0
+  resolution: "ansi-regex@npm:6.3.0"
+  checksum: 10c0/bc047786d0531f1f22d1e22e9863e8554488a399f1ee5270b753efa6de938a788d27456f2b256770f11fdd8b1e847483bc1b55ddc2b3ffe82ec45c875292c651
   languageName: node
   linkType: hard
 
