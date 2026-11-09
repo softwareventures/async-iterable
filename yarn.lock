@@ -714,9 +714,9 @@ __metadata:
   linkType: hard
 
 "@types/estree@npm:^1.0.0, @types/estree@npm:^1.0.6":
-  version: 1.0.9
-  resolution: "@types/estree@npm:1.0.9"
-  checksum: 10c0/3ad3286ca2988cd550dafb8f2ad599c8474868e954fa601a36655bdfefd8039f7c714b8c1c7f2ae219ffbd58bd4660e66fa7479a0120fc02d4777057d4865387
+  version: 1.0.10
+  resolution: "@types/estree@npm:1.0.10"
+  checksum: 10c0/d258926dac68425e77e43fd64045123b77f998ab2cf0bd0cc5a6ff016c365e60ed26f42adac64551906c1beab3bea08d60d113f905829ac60cfd6409db4761e9
   languageName: node
   linkType: hard
 
@@ -989,9 +989,9 @@ __metadata:
   linkType: hard
 
 "ansi-regex@npm:^6.2.2":
-  version: 6.4.0
-  resolution: "ansi-regex@npm:6.4.0"
-  checksum: 10c0/e42f68ffa21aac4c4de27aad601bb5ea415b5a07b127681ef44728195f22231b77bc39230ce0c976420d84650b7bf5a5b60eb4e7500c1f74e9a3f3cd4a68f3f6
+  version: 6.5.0
+  resolution: "ansi-regex@npm:6.5.0"
+  checksum: 10c0/778908f1af800e39f6da2167e515ecef5d7c912fd7e383520dcd80052cf1f8d57b89b6b1f31f58480a5579ab7cc48e401ac194125362d92bdeb8569ac678e3aa
   languageName: node
   linkType: hard
 
@@ -1694,14 +1694,14 @@ __metadata:
   linkType: hard
 
 "conventional-commits-parser@npm:^7.0.0":
-  version: 7.1.3
-  resolution: "conventional-commits-parser@npm:7.1.3"
+  version: 7.1.4
+  resolution: "conventional-commits-parser@npm:7.1.4"
   dependencies:
     "@simple-libs/stream-utils": "npm:^2.0.0"
     argue-cli: "npm:^3.1.0"
   bin:
     conventional-commits-parser: ./dist/cli/index.js
-  checksum: 10c0/0e8ce6d3faaf65a5b3b029fadea4064e27abee7c1ec959945ebc8cad5bfcbdf09c88e4d59baeaf4bacfce3e2d585d86b1dadf7a885176cad404a3f1b41de70d7
+  checksum: 10c0/eef5686d5dde3e8bccaa29bb46cca4190d53143f3cde818191714be1dd41e040c9203728bf4e557c9f63e40817eaa1c4b178832350ae1520e2a607c39f31477b
   languageName: node
   linkType: hard
 
@@ -2145,16 +2145,12 @@ __metadata:
   linkType: hard
 
 "es-toolkit@npm:^1.46.0":
-  version: 1.53.0
-  resolution: "es-toolkit@npm:1.53.0"
+  version: 1.53.2
+  resolution: "es-toolkit@npm:1.53.2"
   dependenciesMeta:
-    "@trivago/prettier-plugin-sort-imports@4.3.0":
-      unplugged: true
-    prettier-plugin-sort-re-exports@0.0.1:
-      unplugged: true
     vitepress-plugin-sandpack@1.1.4:
       unplugged: true
-  checksum: 10c0/52e9497412326c85f89eefa2dcc3caf77bf217ca849b6cb047f147885c9c5173795ae3cbb6ba0ba6c558aaaf626da9d2dbf0f8fb589b2488e647790f943adf00
+  checksum: 10c0/5b0cad13f54e010d84fabd74dbc016a3db09cd9d3992bd97bc06fe54568af439333a61692e68494751c71fd2f453f882711cceb9c61239658a231f013882452a
   languageName: node
   linkType: hard
 
@@ -3249,11 +3245,11 @@ __metadata:
   linkType: hard
 
 "is-core-module@npm:^2.16.1, is-core-module@npm:^2.16.2":
-  version: 2.17.0
-  resolution: "is-core-module@npm:2.17.0"
+  version: 2.18.0
+  resolution: "is-core-module@npm:2.18.0"
   dependencies:
     hasown: "npm:^2.0.4"
-  checksum: 10c0/3dc7c15ea42f846180cd2cdd57af62270e0a8d0ed31c17c85735d554089d39975e2e82e65fc7c8280a3c476ca3d0d09992d0860b4998abb769a277341feb6698
+  checksum: 10c0/2962ad96ff260241a9059ec23b467c69fc5c824168d5f24e806839e32099be69c8e32f444b5ad43854d738e7ca073b31db74c20654f870c96e721d1d785c723b
   languageName: node
   linkType: hard
 
@@ -4587,20 +4583,20 @@ __metadata:
   linkType: hard
 
 "semver@npm:^6.3.1":
-  version: 6.3.1
-  resolution: "semver@npm:6.3.1"
+  version: 6.3.2
+  resolution: "semver@npm:6.3.2"
   bin:
     semver: bin/semver.js
-  checksum: 10c0/e3d79b609071caa78bcb6ce2ad81c7966a46a7431d9d58b8800cfa9cb6a63699b3899a0e4bcce36167a284578212d9ae6942b6929ba4aa5015c079a67751d42d
+  checksum: 10c0/210073b9a7ca6e854ae003d2a735937ac9bce09b34975f28e1dd4c9fce41c1ebfa11aa2babf25ed72c1c79037db39ef7cfba441d05888d558745f47becc14c8f
   languageName: node
   linkType: hard
 
 "semver@npm:^7.3.2, semver@npm:^7.5.2, semver@npm:^7.5.3, semver@npm:^7.6.0, semver@npm:^7.7.2, semver@npm:^7.7.3":
-  version: 7.8.5
-  resolution: "semver@npm:7.8.5"
+  version: 7.8.6
+  resolution: "semver@npm:7.8.6"
   bin:
     semver: bin/semver.js
-  checksum: 10c0/b1f3127a5be8125a94f37188b361c212466c292c6910adce3ec106cff5dc211ccaedc4739c11bb70fda59d6fc1f040a9bca289f4e093451521a2372e5231fe0c
+  checksum: 10c0/bf0a4d16eb067e5391323649e46b4a268644d7f8ee88e37c7668d35e861ec145b6e7df576d898007fc0d9a2cedcbc33f71460aa3bbea18eedfa5af58c064d7fe
   languageName: node
   linkType: hard
 
